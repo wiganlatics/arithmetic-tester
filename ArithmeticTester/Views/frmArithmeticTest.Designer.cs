@@ -47,7 +47,7 @@
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(btnStart_Click);
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // lblGuesses
             // 
@@ -145,7 +145,7 @@
             this.MinimizeBox = false;
             this.Name = "frmArithmeticTest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Choose Operation";
+            this.Text = "Arithmetic Test";
             this.ResumeLayout(false);
             this.PerformLayout();
 

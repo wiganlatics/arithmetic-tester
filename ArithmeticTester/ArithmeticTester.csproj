@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\ArithmeticOperator.cs" />
     <Compile Include="Models\Arithmetic.cs" />
     <Compile Include="Views\frmAnswersTable.cs">
       <SubType>Form</SubType>
