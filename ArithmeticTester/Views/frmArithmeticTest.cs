@@ -1,50 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using ArithmeticTester.Classes;
 
 namespace ArithmeticTester
 {
     /// <summary>
-    /// 
+    /// Arithmetic test form.
     /// </summary>
     public partial class frmArithmeticTest : Form
     {
         /// <summary>
-        /// 
+        /// The random number generator.
         /// </summary>
         Random rd;
         /// <summary>
-        /// 
+        /// Count of correct answers.
         /// </summary>
         byte correct;
         /// <summary>
-        /// 
+        /// Count of total guesses.
         /// </summary>
         byte totguess;
         /// <summary>
-        /// 
+        /// Count of guesses for current question.
         /// </summary>
         byte guess;
         /// <summary>
-        /// 
+        /// Count of number of questions asked so far.
         /// </summary>
         byte qcount;
         /// <summary>
-        /// 
+        /// The arithmetic operator to use for questions.
         /// </summary>
-        const char arithmeticOperator = 'x';
+        ArithmeticOperator arithmeticOperator = ArithmeticOperator.Multiply;
         /// <summary>
-        /// 
+        /// The correct answer for current question.
         /// </summary>
         int answer;
+        /// <summary>
+        /// The minimum factor to use in arithmetic operations.
+        /// </summary>
+        const int minFactorValue = 1;
+        /// <summary>
+        /// The maximum factor to use in arithmetic operations.
+        /// </summary>
+        const int maxFactorValue = 12;
 
         /// <summary>
-        /// 
+        /// Form Constructor.
         /// </summary>
         public frmArithmeticTest()
         {
@@ -54,8 +57,65 @@ namespace ArithmeticTester
             Initialise();
         }
 
+       /// <summary>
+        /// Event Handler for the start button Click event. Start a new set of test questions.
+        /// </summary>
+        /// <param name="sender">The sender objects.</param>
+        /// <param name="e">The Event Arguments.</param>
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            Initialise();
+            btnStart.Enabled = false;
+            GenerateQuestion();
+        }
+
         /// <summary>
-        /// 
+        /// Event Handler for the answer textbox KeyDown event. Checks if the answer is correct.
+        /// </summary>
+        /// <param name="sender">The sender objects.</param>
+        /// <param name="e">The Event Arguments.</param>
+        private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                totguess++;
+                lblGuesses.Text = "Guesses: " + totguess;
+                if (FormatCheck(txtAnswer.Text))
+                {
+                    if (txtAnswer.Text == answer.ToString())
+                    {
+                        if (guess == 0)
+                        {
+                            correct++;
+                            lblCorrect.Text = "Correct :" + correct;
+                        }
+                        MessageBox.Show("Correct!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        GenerateQuestion();
+                        guess = 0;
+                        qcount++;
+                    }
+                    else
+                    {
+                        Wrong(true, Int32.Parse(txtAnswer.Text));
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("That is not a number!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Wrong(false);
+                }
+
+                if (qcount == 10)
+                {
+                     Finished();
+                }
+
+                txtAnswer.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// Initialise the form.
         /// </summary>
         private void Initialise()
         {
@@ -70,91 +130,65 @@ namespace ArithmeticTester
         }
 
         /// <summary>
-        /// 
+        /// Reset the form after test is completed.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnStart_Click(object sender, EventArgs e)
+        private void ResetForm()
         {
-            Initialise();
-            btnStart.Enabled = false;
-            GenerateQuestion();
+            lblFactor1.Text = "";
+            lblFactor2.Text = "";
+            txtAnswer.Text = "";
+            btnStart.Enabled = true;
         }
 
         /// <summary>
-        /// 
+        /// Generates the next question.
         /// </summary>
-        /// <returns></returns>
         private void GenerateQuestion()
         {
-            lblFactor1.Text = rd.Next(1, 12).ToString();
-            lblFactor2.Text = rd.Next(1, 12).ToString();
+            byte x = (byte)rd.Next(minFactorValue, maxFactorValue);
+            byte y = (byte)rd.Next(minFactorValue, maxFactorValue);
+            lblFactor1.Text = x.ToString();
+            lblFactor2.Text = y.ToString();
+            answer = RealAnswer(x, y, arithmeticOperator);
         }
 
         /// <summary>
-        /// 
+        /// Returns the results of the arithmetic operation defined by the given factors and operator.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
+        /// <param name="x">The first factor in the arithmetic operation.</param>
+        /// <param name="y">The second factor in the arithmetic operation.</param>
+        /// <param name="op">The operator for the arithmetic operation.</param>
+        /// <returns>Integer - the result of the arithmetic operation.</returns>
+        private int RealAnswer(byte x, byte y, ArithmeticOperator op)
         {
-            bool correctformat;
-            if (e.KeyCode == Keys.Enter)
+            int result = 0;
+            switch (op)
             {
-                totguess++;
-                lblGuesses.Text = "Guesses: " + totguess;
-                if (FormatCheck(txtAnswer.Text))
-                {
-                    if (txtAnswer.Text == answer.ToString())
-                    {
-                        if (guess == 0)
-                        {
-                            correct++;
-                            lblCorrect.Text = "Correct :" + correct;
-                        }
-                        MessageBox.Show("Correct!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        guess = 0;
-                        qcount++;
-                    }
-                    else
-                    {
-                        correctformat = true;
-                        Wrong(correctformat);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("That is not a number!", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    correctformat = false;
-                    Wrong(correctformat);
-                }
-                if (qcount == 10)
-                {
-                     Finished();
-                }
-                else
-                {
-                    answer = RealAnswer();
-                }
-                txtAnswer.Text = "";
+                case ArithmeticOperator.Add:
+                    result = Arithmetic.Add(x, y);
+                    break;
+                case ArithmeticOperator.Divide:
+                    result = Arithmetic.Divide(x, y);
+                    break;
+                case ArithmeticOperator.Multiply:
+                    result = Arithmetic.Multiply(x, y);
+                    break;
+                case ArithmeticOperator.Subtract:
+                    result = Arithmetic.Subtract(x, y);
+                    break;
+                default:
+                    throw new ArithmeticException("Unknown Arithmetic Operator.");
             }
+
+            return result;
         }
 
         /// <summary>
-        /// 
+        /// Checks that the given string is a a valid (positive or negative) integer.
         /// </summary>
-        /// <returns></returns>
-        private int RealAnswer()
-        {
-            return Int32.Parse(lblFactor1.Text) * Int32.Parse(lblFactor2.Text);
-        }
-
-        /// <summary>
-        /// Checks that the given string is a a valid (positive or negative) integer
-        /// </summary>
-        /// <param name="answer">The string to check</param>
-        /// <returns>Boolean - true if the answer is valid</returns>
-        public bool FormatCheck(string answer)
+        /// <param name="answer">The string to check.</param>
+        /// <returns>Boolean - true if the answer is valid.</returns>
+        private bool FormatCheck(string answer)
         {
             int answerNum;
             bool validAnswer = false;
@@ -168,24 +202,22 @@ namespace ArithmeticTester
         }
 
         /// <summary>
-        /// 
+        /// Determines the actions to take if a user makes an incorrect guess.
         /// </summary>
-        /// <param name="number"></param>
-        private void Wrong(bool number)
+        /// <param name="number">Boolean - true if the </param>
+        /// <param name="givenAnswer">Integer - the answer given by user. Defaults to 0 if an integer was not provided.</param>
+        private void Wrong(bool number, int givenAnswer = 0)
         {
             guess++;
-            if (guess == 1)
+            if (guess == 1 && number == true)
             {
-                if (number == true)
+                if (givenAnswer > answer)
                 {
-                    if (Int32.Parse(txtAnswer.Text) > answer)
-                    {
-                        MessageBox.Show("Incorrect, you are " + (Int32.Parse(txtAnswer.Text) - answer).ToString() + " away!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Incorrect, you are " + (answer - Int32.Parse(txtAnswer.Text)).ToString() + " away!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    MessageBox.Show("Incorrect, you are " + (givenAnswer - answer).ToString() + " away!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect, you are " + (answer - givenAnswer).ToString() + " away!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else if (guess == 2)
@@ -193,47 +225,37 @@ namespace ArithmeticTester
                 //frmArithmeticTest.Hide;
                 switch (arithmeticOperator)
                 {
-                    case 'x':
-                        //frmtimestables.Show;
-                        break;
-                    case '/':
-                        //frmdivisiontables.Show;
-                        break;
-                    case '+':
+                    case ArithmeticOperator.Add:
                         //frmadditiontables.Show;
                         break;
-                    case '-':
+                    case ArithmeticOperator.Divide:
+                        //frmdivisiontables.Show;
+                        break;
+                    case ArithmeticOperator.Multiply:
+                        //frmtimestables.Show;
+                        break;
+                    case ArithmeticOperator.Subtract:
                         //frmsubtractiontables.Show;
                         break;
                 }
             }
             else if (guess == 3)
             {
-                MessageBox.Show("Incorrect, it was " + answer, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Incorrect, it was " + answer, "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 guess = 0;
                 qcount++;
+                GenerateQuestion();
             }
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        private void Reinitialise()
-        {
-            lblFactor1.Text = "";
-            lblFactor2.Text = "";
-            txtAnswer.Text = "";
-            btnStart.Enabled = true;
-        }
-
-        /// <summary>
-        /// 
+        /// Calculates the score and prints the grade based on the test results.
         /// </summary>
         private void Finished()
         {
-            float score = correct / totguess;
-            MessageBox.Show("You have completed the test","", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Reinitialise();
+            float score = (float)correct / (float)totguess;
+            MessageBox.Show("You have completed the test", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ResetForm();
 
             if (score == 1)
             {
