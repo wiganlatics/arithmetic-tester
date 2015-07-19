@@ -92,8 +92,6 @@ namespace ArithmeticTester
                         }
                         MessageBox.Show("Correct!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         GenerateQuestion();
-                        guess = 0;
-                        qcount++;
                     }
                     else
                     {
@@ -120,6 +118,7 @@ namespace ArithmeticTester
         /// </summary>
         private void Initialise()
         {
+            lblQuestion.Text = "Question: 1";
             lblGuesses.Text = "Guesses: 0";
             lblCorrect.Text = "Correct: 0";
             lblGrade.Text = "";
@@ -151,6 +150,9 @@ namespace ArithmeticTester
             lblFactor1.Text = x.ToString();
             lblFactor2.Text = y.ToString();
             answer = RealAnswer(x, y, arithmeticOperator);
+            guess = 0;
+            qcount++;
+            lblQuestion.Text = "Question: " + qcount;
         }
 
         /// <summary>
@@ -243,8 +245,6 @@ namespace ArithmeticTester
             else if (guess == 3)
             {
                 MessageBox.Show("Incorrect, it was " + answer, "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                guess = 0;
-                qcount++;
                 GenerateQuestion();
             }
         }
