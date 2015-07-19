@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ArithmeticTester.Classes;
+using ArithmeticTester.Views;
 
 namespace ArithmeticTester
 {
@@ -222,20 +223,20 @@ namespace ArithmeticTester
             }
             else if (guess == 2)
             {
-                //frmArithmeticTest.Hide;
+                frmAnswersTable AnswersTableForm = new frmAnswersTable();
                 switch (arithmeticOperator)
                 {
                     case ArithmeticOperator.Add:
-                        //frmadditiontables.Show;
+                        AnswersTableForm.ShowDialog();
                         break;
                     case ArithmeticOperator.Divide:
-                        //frmdivisiontables.Show;
+                        AnswersTableForm.ShowDialog();
                         break;
                     case ArithmeticOperator.Multiply:
-                        //frmtimestables.Show;
+                        AnswersTableForm.ShowDialog();
                         break;
                     case ArithmeticOperator.Subtract:
-                        //frmsubtractiontables.Show;
+                        AnswersTableForm.ShowDialog();
                         break;
                 }
             }
