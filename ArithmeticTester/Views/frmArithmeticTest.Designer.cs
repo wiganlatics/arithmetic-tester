@@ -37,6 +37,7 @@
             this.lblEquals = new System.Windows.Forms.Label();
             this.lblFactor2 = new System.Windows.Forms.Label();
             this.lblOperator = new System.Windows.Forms.Label();
+            this.lblQuestion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnStart
@@ -52,7 +53,7 @@
             // lblGuesses
             // 
             this.lblGuesses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGuesses.Location = new System.Drawing.Point(32, 9);
+            this.lblGuesses.Location = new System.Drawing.Point(83, 9);
             this.lblGuesses.Name = "lblGuesses";
             this.lblGuesses.Size = new System.Drawing.Size(78, 17);
             this.lblGuesses.TabIndex = 1;
@@ -60,7 +61,7 @@
             // lblCorrect
             // 
             this.lblCorrect.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCorrect.Location = new System.Drawing.Point(139, 9);
+            this.lblCorrect.Location = new System.Drawing.Point(164, 9);
             this.lblCorrect.Name = "lblCorrect";
             this.lblCorrect.Size = new System.Drawing.Size(78, 17);
             this.lblCorrect.TabIndex = 2;
@@ -126,11 +127,20 @@
             this.lblOperator.Text = "x";
             this.lblOperator.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // lblQuestion
+            // 
+            this.lblQuestion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblQuestion.Location = new System.Drawing.Point(3, 9);
+            this.lblQuestion.Name = "lblQuestion";
+            this.lblQuestion.Size = new System.Drawing.Size(78, 17);
+            this.lblQuestion.TabIndex = 11;
+            // 
             // frmArithmeticTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 262);
+            this.ClientSize = new System.Drawing.Size(247, 262);
+            this.Controls.Add(this.lblQuestion);
             this.Controls.Add(this.lblOperator);
             this.Controls.Add(this.lblFactor2);
             this.Controls.Add(this.lblEquals);
@@ -162,6 +172,7 @@
         private System.Windows.Forms.Label lblEquals;
         private System.Windows.Forms.Label lblFactor2;
         private System.Windows.Forms.Label lblOperator;
+        private System.Windows.Forms.Label lblQuestion;
     }
 }
 

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Resources;
 using System.Windows.Forms;
 using ArithmeticTester.Classes;
+using ArithmeticTester.Views;
 
 namespace ArithmeticTester
 {
@@ -45,6 +47,10 @@ namespace ArithmeticTester
         /// The maximum factor to use in arithmetic operations.
         /// </summary>
         const int maxFactorValue = 12;
+        /// <summary>
+        /// The number of questions to ask.
+        /// </summary>
+        const byte totalQuestions = 10;
 
         /// <summary>
         /// Form Constructor.
@@ -79,7 +85,7 @@ namespace ArithmeticTester
             if (e.KeyCode == Keys.Enter)
             {
                 totguess++;
-                lblGuesses.Text = "Guesses: " + totguess;
+                SetTotalGuessesLabel(totguess);
                 if (FormatCheck(txtAnswer.Text))
                 {
                     if (txtAnswer.Text == answer.ToString())
@@ -87,12 +93,10 @@ namespace ArithmeticTester
                         if (guess == 0)
                         {
                             correct++;
-                            lblCorrect.Text = "Correct :" + correct;
+                            SetCorrectAnswersLabel(correct);
                         }
-                        MessageBox.Show("Correct!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Properties.Resources.CorrectAnswerMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         GenerateQuestion();
-                        guess = 0;
-                        qcount++;
                     }
                     else
                     {
@@ -101,16 +105,11 @@ namespace ArithmeticTester
                 }
                 else
                 {
-                    MessageBox.Show("That is not a number!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(Properties.Resources.AnswerNotANumberMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Wrong(false);
                 }
 
-                if (qcount == 10)
-                {
-                     Finished();
-                }
-
-                txtAnswer.Text = "";
+                ResetAnswerTextBox();
             }
         }
 
@@ -119,14 +118,59 @@ namespace ArithmeticTester
         /// </summary>
         private void Initialise()
         {
-            lblGuesses.Text = "Guesses: 0";
-            lblCorrect.Text = "Correct: 0";
-            lblGrade.Text = "";
             correct = 0;
             totguess = 0;
             guess = 0;
             qcount = 0;
             answer = 0;
+            SetQuestionNumberLabel(1);
+            SetTotalGuessesLabel(totguess);
+            SetCorrectAnswersLabel(correct);
+            SetGradeLabel("");
+        }
+
+        /// <summary>
+        /// Updates the question number label.
+        /// </summary>
+        /// <param name="questionNumber">The number of questions completed.</param>
+        private void SetQuestionNumberLabel(byte questionNumber)
+        {
+            lblQuestion.Text = string.Format("{0}: {1}", Properties.Resources.QuestionLabel, questionNumber);
+        }
+
+        /// <summary>
+        /// Updates the correct answers label.
+        /// </summary>
+        /// <param name="correctAnswers">The number of correct answers.</param>
+        private void SetCorrectAnswersLabel(byte correctAnswers)
+        {
+            lblCorrect.Text = string.Format("{0}: {1}", Properties.Resources.CorrectLabel, correctAnswers);
+        }
+
+        /// <summary>
+        /// Updates the total guesses label.
+        /// </summary>
+        /// <param name="totalGuesses">The number of total guesses.</param>
+        private void SetTotalGuessesLabel(byte totalGuesses)
+        {
+            lblGuesses.Text = string.Format("{0}: {1}", Properties.Resources.GuessesLabel, totalGuesses);
+        }
+
+        /// <summary>
+        /// Updates that grade label.
+        /// </summary>
+        /// <param name="grade">The string value that the label should show.</param>
+        private void SetGradeLabel(string grade)
+        {
+            lblGrade.Text = grade;
+        }
+
+        /// <summary>
+        /// Reset the answer textbox to be blank.
+        /// </summary>
+        private void ResetAnswerTextBox()
+        {
+            txtAnswer.Text = "";
         }
 
         /// <summary>
@@ -136,20 +180,31 @@ namespace ArithmeticTester
         {
             lblFactor1.Text = "";
             lblFactor2.Text = "";
-            txtAnswer.Text = "";
+            ResetAnswerTextBox();
             btnStart.Enabled = true;
         }
 
         /// <summary>
-        /// Generates the next question.
+        /// Generates the next question. Unless the last question is reached, in which case the results are displayed.
         /// </summary>
         private void GenerateQuestion()
         {
-            byte x = (byte)rd.Next(minFactorValue, maxFactorValue);
-            byte y = (byte)rd.Next(minFactorValue, maxFactorValue);
-            lblFactor1.Text = x.ToString();
-            lblFactor2.Text = y.ToString();
-            answer = RealAnswer(x, y, arithmeticOperator);
+            qcount++;
+            SetQuestionNumberLabel(qcount);
+
+            if (qcount == totalQuestions)
+            {
+                Finished();
+            }
+            else
+            {
+                byte x = (byte)rd.Next(minFactorValue, maxFactorValue);
+                byte y = (byte)rd.Next(minFactorValue, maxFactorValue);
+                lblFactor1.Text = x.ToString();
+                lblFactor2.Text = y.ToString();
+                answer = RealAnswer(x, y, arithmeticOperator);
+                guess = 0;
+            }
         }
 
         /// <summary>
@@ -177,7 +232,7 @@ namespace ArithmeticTester
                     result = Arithmetic.Subtract(x, y);
                     break;
                 default:
-                    throw new ArithmeticException("Unknown Arithmetic Operator.");
+                    throw new ArithmeticException(Properties.Resources.UnknownOperatorException);
             }
 
             return result;
@@ -213,37 +268,35 @@ namespace ArithmeticTester
             {
                 if (givenAnswer > answer)
                 {
-                    MessageBox.Show("Incorrect, you are " + (givenAnswer - answer).ToString() + " away!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (givenAnswer - answer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Incorrect, you are " + (answer - givenAnswer).ToString() + " away!", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (answer - givenAnswer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else if (guess == 2)
             {
-                //frmArithmeticTest.Hide;
+                frmAnswersTable AnswersTableForm = new frmAnswersTable();
                 switch (arithmeticOperator)
                 {
                     case ArithmeticOperator.Add:
-                        //frmadditiontables.Show;
+                        AnswersTableForm.ShowDialog();
                         break;
                     case ArithmeticOperator.Divide:
-                        //frmdivisiontables.Show;
+                        AnswersTableForm.ShowDialog();
                         break;
                     case ArithmeticOperator.Multiply:
-                        //frmtimestables.Show;
+                        AnswersTableForm.ShowDialog();
                         break;
                     case ArithmeticOperator.Subtract:
-                        //frmsubtractiontables.Show;
+                        AnswersTableForm.ShowDialog();
                         break;
                 }
             }
             else if (guess == 3)
             {
-                MessageBox.Show("Incorrect, it was " + answer, "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                guess = 0;
-                qcount++;
+                MessageBox.Show(string.Format(Properties.Resources.IncorrectThirdGuessMessage, answer), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 GenerateQuestion();
             }
         }
@@ -253,29 +306,29 @@ namespace ArithmeticTester
         /// </summary>
         private void Finished()
         {
-            float score = (float)correct / (float)totguess;
-            MessageBox.Show("You have completed the test", "Arithmetic Tester", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(Properties.Resources.TestCompleteMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             ResetForm();
 
+            float score = (float)correct / (float)totguess;
             if (score == 1)
             {
-                lblGrade.Text = "Outstanding";
+                SetGradeLabel(Properties.Resources.OutstandingGrade);
             }
             else if (0.55 < score && score < 1)
             {
-                lblGrade.Text = "Excellent";
+                SetGradeLabel(Properties.Resources.ExcellentGrade);
             }
             else if (0.3 < score && score <= 0.55)
             {
-                lblGrade.Text = "Good";
+                SetGradeLabel(Properties.Resources.GoodGrade);
             }
             else if (0.1 < score && score <= 0.3)
             {
-                lblGrade.Text = "Satisfactory";
+                SetGradeLabel(Properties.Resources.SatisfactoryGrade);
             }
             else
             {
-                lblGrade.Text = "Please see your teacher";
+                SetGradeLabel(Properties.Resources.UnsatisfactoryGrade);
             }
         }
     }
