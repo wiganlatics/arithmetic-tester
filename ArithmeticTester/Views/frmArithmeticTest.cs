@@ -1,11 +1,12 @@
-﻿using System;
-using System.Resources;
-using System.Windows.Forms;
-using ArithmeticTester.Classes;
-using ArithmeticTester.Views;
-
+﻿
 namespace ArithmeticTester
 {
+    using System;
+    using System.Resources;
+    using System.Windows.Forms;
+    using ArithmeticTester.Classes;
+    using ArithmeticTester.Views;
+
     /// <summary>
     /// Arithmetic test form.
     /// </summary>
@@ -14,43 +15,35 @@ namespace ArithmeticTester
         /// <summary>
         /// The random number generator.
         /// </summary>
-        Random rd;
+        private Random rd;
         /// <summary>
         /// Count of correct answers.
         /// </summary>
-        byte correct;
+        private byte correct;
         /// <summary>
         /// Count of total guesses.
         /// </summary>
-        byte totguess;
+        private byte totguess;
         /// <summary>
         /// Count of guesses for current question.
         /// </summary>
-        byte guess;
+        private byte guess;
         /// <summary>
         /// Count of number of questions asked so far.
         /// </summary>
-        byte qcount;
+        private byte qcount;
         /// <summary>
         /// The arithmetic operator to use for questions.
         /// </summary>
-        ArithmeticOperator arithmeticOperator = ArithmeticOperator.Multiply;
+        private ArithmeticOperator arithmeticOperator = ArithmeticOperator.Multiply;
         /// <summary>
         /// The correct answer for current question.
         /// </summary>
-        int answer;
-        /// <summary>
-        /// The minimum factor to use in arithmetic operations.
-        /// </summary>
-        const int minFactorValue = 1;
-        /// <summary>
-        /// The maximum factor to use in arithmetic operations.
-        /// </summary>
-        const int maxFactorValue = 12;
+        private int answer;
         /// <summary>
         /// The number of questions to ask.
         /// </summary>
-        const byte totalQuestions = 10;
+        private const byte totalQuestions = 10;
 
         /// <summary>
         /// Form Constructor.
@@ -198,8 +191,8 @@ namespace ArithmeticTester
             }
             else
             {
-                byte x = (byte)rd.Next(minFactorValue, maxFactorValue);
-                byte y = (byte)rd.Next(minFactorValue, maxFactorValue);
+                byte x = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
+                byte y = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
                 lblFactor1.Text = x.ToString();
                 lblFactor2.Text = y.ToString();
                 answer = RealAnswer(x, y, arithmeticOperator);

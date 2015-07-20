@@ -61,6 +61,15 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can only add numbers between {0} and {1}..
+        /// </summary>
+        internal static string AdditionArgumentsOutOfRange {
+            get {
+                return ResourceManager.GetString("AdditionArgumentsOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to That is not a number!.
         /// </summary>
         internal static string AnswerNotANumberMessage {
@@ -84,6 +93,24 @@ namespace ArithmeticTester.Properties {
         internal static string CorrectLabel {
             get {
                 return ResourceManager.GetString("CorrectLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only use dividends between {0} and {1}..
+        /// </summary>
+        internal static string DividendArgumentsOutOfRange {
+            get {
+                return ResourceManager.GetString("DividendArgumentsOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only use divisors between {0} and {1}..
+        /// </summary>
+        internal static string DivisorArgumentOutOfRange {
+            get {
+                return ResourceManager.GetString("DivisorArgumentOutOfRange", resourceCulture);
             }
         }
         
@@ -142,6 +169,15 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can only multiply numbers between {0} and {1}..
+        /// </summary>
+        internal static string MultiplicationArgumentsOutOfRange {
+            get {
+                return ResourceManager.GetString("MultiplicationArgumentsOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outstanding.
         /// </summary>
         internal static string OutstandingGrade {
@@ -165,6 +201,15 @@ namespace ArithmeticTester.Properties {
         internal static string SatisfactoryGrade {
             get {
                 return ResourceManager.GetString("SatisfactoryGrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only subtract numbers between {0} and {1}..
+        /// </summary>
+        internal static string SubtractionArgumentsOutOfRange {
+            get {
+                return ResourceManager.GetString("SubtractionArgumentsOutOfRange", resourceCulture);
             }
         }
         

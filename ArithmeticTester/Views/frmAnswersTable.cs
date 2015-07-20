@@ -1,22 +1,14 @@
-﻿using System.Windows.Forms;
-using ArithmeticTester.Classes;
-
+﻿
 namespace ArithmeticTester.Views
 {
+    using System.Windows.Forms;
+    using ArithmeticTester.Classes;
+
     /// <summary>
     /// Form to display a table of answers 
     /// </summary>
     public partial class frmAnswersTable : Form
     {
-        /// <summary>
-        /// The minimum factor to use in arithmetic operations.
-        /// </summary>
-        private const byte minFactorValue = 1;
-        /// <summary>
-        /// The maximum factor to use in arithmetic operations.
-        /// </summary>
-        private const byte maxFactorValue = 12;
-
         /// <summary>
         /// Form Constructor.
         /// </summary>
@@ -32,7 +24,7 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void Initialise()
         {
-            for (byte b = minFactorValue; b <= maxFactorValue; b++)
+            for (byte b = Arithmetic.minFactorValue; b <= Arithmetic.maxFactorValue; b++)
             {
                 grdAnswersTable.Columns.Add(b.ToString(), b.ToString());
                 grdAnswersTable.Columns[b - 1].Width = 30;
@@ -40,7 +32,7 @@ namespace ArithmeticTester.Views
                 grdAnswersTable.Rows[b - 1].HeaderCell.Value = b.ToString();
 
                 // Populate cells
-                for (byte c = minFactorValue; c < b; c++)
+                for (byte c = Arithmetic.minFactorValue; c < b; c++)
                 {
                     grdAnswersTable[c - 1, b - 1].Value = Arithmetic.Multiply(c, b);
                     grdAnswersTable[b - 1, c - 1].Value = grdAnswersTable[c - 1, b - 1].Value;
