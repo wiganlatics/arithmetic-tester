@@ -1,5 +1,5 @@
 ﻿
-namespace ArithmeticTester.Classes
+namespace ArithmeticTester.Models
 {
     using System;
 

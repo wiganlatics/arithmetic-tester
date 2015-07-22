@@ -38,11 +38,12 @@
             this.lblFactor2 = new System.Windows.Forms.Label();
             this.lblOperator = new System.Windows.Forms.Label();
             this.lblQuestion = new System.Windows.Forms.Label();
+            this.cmbOperation = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(86, 66);
+            this.btnStart.Location = new System.Drawing.Point(142, 66);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
@@ -78,7 +79,7 @@
             // txtAnswer
             // 
             this.txtAnswer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnswer.Location = new System.Drawing.Point(178, 103);
+            this.txtAnswer.Location = new System.Drawing.Point(176, 100);
             this.txtAnswer.Name = "txtAnswer";
             this.txtAnswer.Size = new System.Drawing.Size(64, 23);
             this.txtAnswer.TabIndex = 4;
@@ -89,7 +90,7 @@
             // 
             this.lblFactor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblFactor1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFactor1.Location = new System.Drawing.Point(12, 102);
+            this.lblFactor1.Location = new System.Drawing.Point(10, 101);
             this.lblFactor1.Name = "lblFactor1";
             this.lblFactor1.Size = new System.Drawing.Size(37, 21);
             this.lblFactor1.TabIndex = 7;
@@ -99,7 +100,7 @@
             // 
             this.lblEquals.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblEquals.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEquals.Location = new System.Drawing.Point(139, 102);
+            this.lblEquals.Location = new System.Drawing.Point(137, 101);
             this.lblEquals.Name = "lblEquals";
             this.lblEquals.Size = new System.Drawing.Size(37, 21);
             this.lblEquals.TabIndex = 8;
@@ -110,7 +111,7 @@
             // 
             this.lblFactor2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblFactor2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFactor2.Location = new System.Drawing.Point(98, 102);
+            this.lblFactor2.Location = new System.Drawing.Point(96, 101);
             this.lblFactor2.Name = "lblFactor2";
             this.lblFactor2.Size = new System.Drawing.Size(37, 21);
             this.lblFactor2.TabIndex = 9;
@@ -120,7 +121,7 @@
             // 
             this.lblOperator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblOperator.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOperator.Location = new System.Drawing.Point(55, 102);
+            this.lblOperator.Location = new System.Drawing.Point(53, 101);
             this.lblOperator.Name = "lblOperator";
             this.lblOperator.Size = new System.Drawing.Size(37, 21);
             this.lblOperator.TabIndex = 10;
@@ -135,11 +136,21 @@
             this.lblQuestion.Size = new System.Drawing.Size(78, 17);
             this.lblQuestion.TabIndex = 11;
             // 
+            // cmbOperation
+            // 
+            this.cmbOperation.FormattingEnabled = true;
+            this.cmbOperation.Location = new System.Drawing.Point(10, 68);
+            this.cmbOperation.Name = "cmbOperation";
+            this.cmbOperation.Size = new System.Drawing.Size(121, 21);
+            this.cmbOperation.TabIndex = 13;
+            this.cmbOperation.SelectedIndexChanged += new System.EventHandler(this.cmbOperation_SelectedIndexChanged);
+            // 
             // frmArithmeticTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(247, 262);
+            this.Controls.Add(this.cmbOperation);
             this.Controls.Add(this.lblQuestion);
             this.Controls.Add(this.lblOperator);
             this.Controls.Add(this.lblFactor2);
@@ -173,6 +184,7 @@
         private System.Windows.Forms.Label lblFactor2;
         private System.Windows.Forms.Label lblOperator;
         private System.Windows.Forms.Label lblQuestion;
+        private System.Windows.Forms.ComboBox cmbOperation;
     }
 }
 
