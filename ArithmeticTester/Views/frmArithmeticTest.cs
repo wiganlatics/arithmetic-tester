@@ -2,9 +2,9 @@
 namespace ArithmeticTester
 {
     using System;
-    using System.Resources;
     using System.Windows.Forms;
-    using ArithmeticTester.Classes;
+    using ArithmeticTester.Controllers;
+    using ArithmeticTester.Models;
     using ArithmeticTester.Views;
 
     /// <summary>
@@ -33,10 +33,6 @@ namespace ArithmeticTester
         /// </summary>
         private byte qcount;
         /// <summary>
-        /// The arithmetic operator to use for questions.
-        /// </summary>
-        private ArithmeticOperator arithmeticOperator = ArithmeticOperator.Multiply;
-        /// <summary>
         /// The correct answer for current question.
         /// </summary>
         private int answer;
@@ -54,6 +50,12 @@ namespace ArithmeticTester
 
             rd = new Random();
             Initialise();
+
+            cmbOperation.Items.Add("Add");
+            //cmbOperation.Items.Add("Divide");
+            cmbOperation.Items.Add("Multiply");
+            cmbOperation.Items.Add("Subtract");
+            cmbOperation.SelectedItem = "Multiply";
         }
 
        /// <summary>
@@ -65,6 +67,7 @@ namespace ArithmeticTester
         {
             Initialise();
             btnStart.Enabled = false;
+            cmbOperation.Enabled = false;
             GenerateQuestion();
         }
 
@@ -103,6 +106,34 @@ namespace ArithmeticTester
                 }
 
                 ResetAnswerTextBox();
+            }
+        }
+
+        /// <summary>
+        /// Event Handler for the operation combo box SelectedIndexChanged event. Switches the arithmetic operator to the new selection.
+        /// </summary>
+        /// <param name="sender">The sender objects.</param>
+        /// <param name="e">The Event Arguments.</param>
+        private void cmbOperation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbOperation.SelectedItem.ToString())
+            {
+                case "Add":
+                    lblOperator.Text = "+";
+                    ArithmeticTest.arithmeticOperator = ArithmeticOperator.Add;
+                    break;
+                case "Divide":
+                    lblOperator.Text = "/";
+                    ArithmeticTest.arithmeticOperator = ArithmeticOperator.Divide;
+                    break;
+                case "Multiply":
+                    lblOperator.Text = "x";
+                    ArithmeticTest.arithmeticOperator = ArithmeticOperator.Multiply;
+                    break;
+                case "Subtract":
+                    lblOperator.Text = "-";
+                    ArithmeticTest.arithmeticOperator = ArithmeticOperator.Subtract;
+                    break;
             }
         }
 
@@ -175,6 +206,7 @@ namespace ArithmeticTester
             lblFactor2.Text = "";
             ResetAnswerTextBox();
             btnStart.Enabled = true;
+            cmbOperation.Enabled = true;
         }
 
         /// <summary>
@@ -195,40 +227,9 @@ namespace ArithmeticTester
                 byte y = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
                 lblFactor1.Text = x.ToString();
                 lblFactor2.Text = y.ToString();
-                answer = RealAnswer(x, y, arithmeticOperator);
+                answer = ArithmeticTest.RealAnswer(x, y, ArithmeticTest.arithmeticOperator);
                 guess = 0;
             }
-        }
-
-        /// <summary>
-        /// Returns the results of the arithmetic operation defined by the given factors and operator.
-        /// </summary>
-        /// <param name="x">The first factor in the arithmetic operation.</param>
-        /// <param name="y">The second factor in the arithmetic operation.</param>
-        /// <param name="op">The operator for the arithmetic operation.</param>
-        /// <returns>Integer - the result of the arithmetic operation.</returns>
-        private int RealAnswer(byte x, byte y, ArithmeticOperator op)
-        {
-            int result = 0;
-            switch (op)
-            {
-                case ArithmeticOperator.Add:
-                    result = Arithmetic.Add(x, y);
-                    break;
-                case ArithmeticOperator.Divide:
-                    result = Arithmetic.Divide(x, y);
-                    break;
-                case ArithmeticOperator.Multiply:
-                    result = Arithmetic.Multiply(x, y);
-                    break;
-                case ArithmeticOperator.Subtract:
-                    result = Arithmetic.Subtract(x, y);
-                    break;
-                default:
-                    throw new ArithmeticException(Properties.Resources.UnknownOperatorException);
-            }
-
-            return result;
         }
 
         /// <summary>
@@ -271,7 +272,7 @@ namespace ArithmeticTester
             else if (guess == 2)
             {
                 frmAnswersTable AnswersTableForm = new frmAnswersTable();
-                switch (arithmeticOperator)
+                switch (ArithmeticTest.arithmeticOperator)
                 {
                     case ArithmeticOperator.Add:
                         AnswersTableForm.ShowDialog();
