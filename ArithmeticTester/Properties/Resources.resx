@@ -138,6 +138,9 @@
   <data name="ExcellentGrade" xml:space="preserve">
     <value>Excellent</value>
   </data>
+  <data name="FactorTwoArgumentOutOfRange" xml:space="preserve">
+    <value>Factor two must be between {0} and {1}.</value>
+  </data>
   <data name="GoodGrade" xml:space="preserve">
     <value>Good</value>
   </data>

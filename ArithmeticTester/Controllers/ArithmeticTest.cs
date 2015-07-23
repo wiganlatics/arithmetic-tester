@@ -1,17 +1,60 @@
-﻿using System;
-
+﻿
 namespace ArithmeticTester.Controllers
 {
+    using System;
     using ArithmeticTester.Models;
+
     /// <summary>
     /// Maintains the state of the arithmetic test.
     /// </summary>
     public static class ArithmeticTest
     {
+        private static byte _factor1 = Arithmetic.maxFactorValue;
+        private static byte _factor2 = Arithmetic.maxFactorValue;
+
         /// <summary>
         /// The arithmetic operator to use for questions.
         /// </summary>
         public static ArithmeticOperator arithmeticOperator = ArithmeticOperator.Multiply;
+
+        /// <summary>
+        /// Public getter and setter for the first factor of arithmetic questions.
+        /// </summary>
+        /*public static byte Factor1 
+        {
+            // Setter is complicated - the value could be larger than normal range if division is selected.
+            get { return _factor1; }
+            set
+            {
+                if (value >= Arithmetic.minFactorValue && value <= Arithmetic.maxFactorValue)
+                {
+                    _factor1 = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+            }
+        }*/
+        
+        /// <summary>
+        /// Public getter and setter for the second factor of arithmetic questions.
+        /// </summary>
+        public static byte Factor2
+        { 
+            get { return _factor2; }
+            set
+            {
+                if (value >= Arithmetic.minFactorValue && value <= Arithmetic.maxFactorValue)
+                {
+                    _factor2 = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(string.Format(Properties.Resources.FactorTwoArgumentOutOfRange, Arithmetic.minFactorValue, Arithmetic.maxFactorValue));
+                }
+            }
+        }
 
         /// <summary>
         /// Returns the results of the arithmetic operation defined by the given factors and operator.
