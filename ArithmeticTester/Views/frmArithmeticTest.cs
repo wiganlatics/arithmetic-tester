@@ -52,7 +52,7 @@ namespace ArithmeticTester
             Initialise();
 
             cmbOperation.Items.Add("Add");
-            //cmbOperation.Items.Add("Divide");
+            cmbOperation.Items.Add("Divide");
             cmbOperation.Items.Add("Multiply");
             cmbOperation.Items.Add("Subtract");
             cmbOperation.SelectedItem = "Multiply";
@@ -223,8 +223,8 @@ namespace ArithmeticTester
             }
             else
             {
-                byte x = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
                 ArithmeticTest.Factor2 = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
+                byte x = (byte)Arithmetic.Multiply(ArithmeticTest.Factor2, (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue));
                 lblFactor1.Text = x.ToString();
                 lblFactor2.Text = ArithmeticTest.Factor2.ToString();
                 answer = ArithmeticTest.RealAnswer(x, ArithmeticTest.Factor2, ArithmeticTest.arithmeticOperator);
