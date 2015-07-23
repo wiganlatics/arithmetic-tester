@@ -1,6 +1,7 @@
 ﻿
 namespace ArithmeticTester.Views
 {
+    using System;
     using System.Windows.Forms;
     using ArithmeticTester.Controllers;
     using ArithmeticTester.Models;
@@ -78,7 +79,40 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void DivisionTable()
         {
+            for (byte b = Arithmetic.minFactorValue; b <= Arithmetic.maxFactorValue; b++)
+            {
+                // Create columns and rows
+                byte colHeader = (byte)Arithmetic.Multiply(b, ArithmeticTest.Factor2);
+                grdAnswersTable.Columns.Add(colHeader.ToString(), colHeader.ToString());
+                grdAnswersTable.Columns[b - 1].Width = colWidth;
+                grdAnswersTable.Rows.Add();
+                grdAnswersTable.Rows[b - 1].HeaderCell.Value = b.ToString();
 
+                // Populate cells
+                for (byte c = Arithmetic.minFactorValue; c < b; c++)
+                {
+                    if (colHeader % c == 0 && colHeader / c >= Arithmetic.minFactorValue && colHeader / c <= Arithmetic.maxFactorValue)
+                    {
+                        grdAnswersTable[b - 1, c - 1].Value = Arithmetic.Divide(colHeader, c).ToString();
+                    }
+                    else
+                    {
+                        grdAnswersTable[b - 1, c - 1].Value = "-";
+                    }
+
+                    byte curColHeader = byte.Parse(grdAnswersTable.Columns[c - 1].HeaderCell.Value.ToString());
+                    if (curColHeader % b == 0 && curColHeader / b >= Arithmetic.minFactorValue && curColHeader / b <= Arithmetic.maxFactorValue)
+                    {
+                        grdAnswersTable[c - 1, b - 1].Value = Arithmetic.Divide(curColHeader, b).ToString();
+                    }
+                    else
+                    {
+                        grdAnswersTable[c - 1, b - 1].Value = "-";
+                    }
+                }
+
+                grdAnswersTable[b - 1, b - 1].Value = ArithmeticTest.Factor2;
+            }
         }
 
         /// <summary>

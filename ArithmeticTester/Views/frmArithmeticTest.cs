@@ -224,10 +224,10 @@ namespace ArithmeticTester
             else
             {
                 byte x = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
-                byte y = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
+                ArithmeticTest.Factor2 = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
                 lblFactor1.Text = x.ToString();
-                lblFactor2.Text = y.ToString();
-                answer = ArithmeticTest.RealAnswer(x, y, ArithmeticTest.arithmeticOperator);
+                lblFactor2.Text = ArithmeticTest.Factor2.ToString();
+                answer = ArithmeticTest.RealAnswer(x, ArithmeticTest.Factor2, ArithmeticTest.arithmeticOperator);
                 guess = 0;
             }
         }

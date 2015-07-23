@@ -60,7 +60,7 @@ namespace ArithmeticTester.Models
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException(string.Format(Properties.Resources.DividendArgumentsOutOfRange, minFactorValue ^ 2, maxFactorValue ^ 2));
+                    throw new ArgumentOutOfRangeException(string.Format(Properties.Resources.DividendArgumentsOutOfRange, minFactorValue * minFactorValue, minFactorValue * maxFactorValue));
                 }
             }
             else
