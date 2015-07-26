@@ -185,7 +185,6 @@ namespace ArithmeticTester
             txtAnswer.Text = "";
         }
 
-
         /// <summary>
         /// Reset the form after test is completed.
         /// </summary>
