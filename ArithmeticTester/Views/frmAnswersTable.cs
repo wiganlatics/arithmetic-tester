@@ -82,7 +82,7 @@ namespace ArithmeticTester.Views
             for (byte b = Arithmetic.minFactorValue; b <= Arithmetic.maxFactorValue; b++)
             {
                 // Create columns and rows
-                byte colHeader = (byte)Arithmetic.Multiply(b, ArithmeticTest.Factor2);
+                byte colHeader = (byte)Arithmetic.Multiply(b, ArithmeticTest.GetFactor2());
                 grdAnswersTable.Columns.Add(colHeader.ToString(), colHeader.ToString());
                 grdAnswersTable.Columns[b - 1].Width = colWidth;
                 grdAnswersTable.Rows.Add();
@@ -111,7 +111,7 @@ namespace ArithmeticTester.Views
                     }
                 }
 
-                grdAnswersTable[b - 1, b - 1].Value = ArithmeticTest.Factor2;
+                grdAnswersTable[b - 1, b - 1].Value = ArithmeticTest.GetFactor2();
             }
         }
 

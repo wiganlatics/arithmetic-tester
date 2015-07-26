@@ -115,20 +115,20 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not load answers table: {0}.
+        /// </summary>
+        internal static string ErrorLoadingAnswersTable {
+            get {
+                return ResourceManager.GetString("ErrorLoadingAnswersTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Excellent.
         /// </summary>
         internal static string ExcellentGrade {
             get {
                 return ResourceManager.GetString("ExcellentGrade", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Factor two must be between {0} and {1}..
-        /// </summary>
-        internal static string FactorTwoArgumentOutOfRange {
-            get {
-                return ResourceManager.GetString("FactorTwoArgumentOutOfRange", resourceCulture);
             }
         }
         
