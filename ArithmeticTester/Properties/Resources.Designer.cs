@@ -133,15 +133,6 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Factor two must be between {0} and {1}..
-        /// </summary>
-        internal static string FactorTwoArgumentOutOfRange {
-            get {
-                return ResourceManager.GetString("FactorTwoArgumentOutOfRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Good.
         /// </summary>
         internal static string GoodGrade {

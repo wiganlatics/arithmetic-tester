@@ -13,42 +13,12 @@ namespace ArithmeticTester
     public partial class frmArithmeticTest : Form
     {
         /// <summary>
-        /// The random number generator.
-        /// </summary>
-        private Random rd;
-        /// <summary>
-        /// Count of correct answers.
-        /// </summary>
-        private byte correct;
-        /// <summary>
-        /// Count of total guesses.
-        /// </summary>
-        private byte totguess;
-        /// <summary>
-        /// Count of guesses for current question.
-        /// </summary>
-        private byte guess;
-        /// <summary>
-        /// Count of number of questions asked so far.
-        /// </summary>
-        private byte qcount;
-        /// <summary>
-        /// The correct answer for current question.
-        /// </summary>
-        private int answer;
-        /// <summary>
-        /// The number of questions to ask.
-        /// </summary>
-        private const byte totalQuestions = 10;
-
-        /// <summary>
         /// Form Constructor.
         /// </summary>
         public frmArithmeticTest()
         {
             InitializeComponent();
 
-            rd = new Random();
             Initialise();
 
             cmbOperation.Items.Add("Add");
@@ -58,7 +28,7 @@ namespace ArithmeticTester
             cmbOperation.SelectedItem = "Multiply";
         }
 
-       /// <summary>
+        /// <summary>
         /// Event Handler for the start button Click event. Start a new set of test questions.
         /// </summary>
         /// <param name="sender">The sender objects.</param>
@@ -80,16 +50,16 @@ namespace ArithmeticTester
         {
             if (e.KeyCode == Keys.Enter)
             {
-                totguess++;
-                SetTotalGuessesLabel(totguess);
+                ArithmeticTest.IncrementTotalGuessCount();
+                SetTotalGuessesLabel(ArithmeticTest.GetTotalGuessCount());
                 if (FormatCheck(txtAnswer.Text))
                 {
-                    if (txtAnswer.Text == answer.ToString())
+                    if (txtAnswer.Text == ArithmeticTest.GetRealAnswer().ToString())
                     {
-                        if (guess == 0)
+                        if (ArithmeticTest.GetGuessCount() == 0)
                         {
-                            correct++;
-                            SetCorrectAnswersLabel(correct);
+                            ArithmeticTest.IncrementCorrectCount();
+                            SetCorrectAnswersLabel(ArithmeticTest.GetCorrectCount());
                         }
                         MessageBox.Show(Properties.Resources.CorrectAnswerMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         GenerateQuestion();
@@ -142,14 +112,14 @@ namespace ArithmeticTester
         /// </summary>
         private void Initialise()
         {
-            correct = 0;
-            totguess = 0;
-            guess = 0;
-            qcount = 0;
-            answer = 0;
+            ArithmeticTest.ResetCorrectCount();
+            ArithmeticTest.ResetTotalGuessCount();
+            ArithmeticTest.ResetGuessCount();
+            ArithmeticTest.ResetQuestionCount();
+            ArithmeticTest.SetRealAnswer();
             SetQuestionNumberLabel(1);
-            SetTotalGuessesLabel(totguess);
-            SetCorrectAnswersLabel(correct);
+            SetTotalGuessesLabel(ArithmeticTest.GetTotalGuessCount());
+            SetCorrectAnswersLabel(ArithmeticTest.GetCorrectCount());
             SetGradeLabel("");
         }
 
@@ -181,12 +151,30 @@ namespace ArithmeticTester
         }
 
         /// <summary>
-        /// Updates that grade label.
+        /// Updates the grade label.
         /// </summary>
         /// <param name="grade">The string value that the label should show.</param>
         private void SetGradeLabel(string grade)
         {
             lblGrade.Text = grade;
+        }
+
+        /// <summary>
+        /// Updates the first factor label.
+        /// </summary>
+        /// <param name="factor">The string value that the label should show.</param>
+        private void SetFactor1Label(string factor)
+        {
+            lblFactor1.Text = factor;
+        }
+
+        /// <summary>
+        /// Updates the second factor label.
+        /// </summary>
+        /// <param name="factor">The string value that the label should show.</param>
+        private void SetFactor2Label(string factor)
+        {
+            lblFactor2.Text = factor;
         }
 
         /// <summary>
@@ -197,13 +185,14 @@ namespace ArithmeticTester
             txtAnswer.Text = "";
         }
 
+
         /// <summary>
         /// Reset the form after test is completed.
         /// </summary>
         private void ResetForm()
         {
-            lblFactor1.Text = "";
-            lblFactor2.Text = "";
+            SetFactor1Label("");
+            SetFactor2Label("");
             ResetAnswerTextBox();
             btnStart.Enabled = true;
             cmbOperation.Enabled = true;
@@ -214,22 +203,20 @@ namespace ArithmeticTester
         /// </summary>
         private void GenerateQuestion()
         {
-            qcount++;
-            SetQuestionNumberLabel(qcount);
+            ArithmeticTest.IncrementQuestionCount();
+            SetQuestionNumberLabel(ArithmeticTest.GetQuestionCount());
 
-            if (qcount == totalQuestions)
+            if (ArithmeticTest.GetQuestionCount() == ArithmeticTest.totalQuestions)
             {
                 Finished();
             }
             else
             {
-                ArithmeticTest.Factor2 = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
-                byte x = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
-                if (ArithmeticTest.arithmeticOperator == ArithmeticOperator.Divide) x = (byte)Arithmetic.Multiply(ArithmeticTest.Factor2, x);
-                lblFactor1.Text = x.ToString();
-                lblFactor2.Text = ArithmeticTest.Factor2.ToString();
-                answer = ArithmeticTest.RealAnswer(x, ArithmeticTest.Factor2, ArithmeticTest.arithmeticOperator);
-                guess = 0;
+                ArithmeticTest.SetNextFactors();
+                SetFactor1Label(ArithmeticTest.GetFactor1().ToString());
+                SetFactor2Label(ArithmeticTest.GetFactor2().ToString());
+                ArithmeticTest.SetRealAnswer();
+                ArithmeticTest.ResetGuessCount();
             }
         }
 
@@ -258,19 +245,19 @@ namespace ArithmeticTester
         /// <param name="givenAnswer">Integer - the answer given by user. Defaults to 0 if an integer was not provided.</param>
         private void Wrong(bool number, int givenAnswer = 0)
         {
-            guess++;
-            if (guess == 1 && number == true)
+            ArithmeticTest.IncrementGuessCount();
+            if (ArithmeticTest.GetGuessCount() == 1 && number == true)
             {
-                if (givenAnswer > answer)
+                if (givenAnswer > ArithmeticTest.GetRealAnswer())
                 {
-                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (givenAnswer - answer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (givenAnswer - ArithmeticTest.GetRealAnswer())), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (answer - givenAnswer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (ArithmeticTest.GetRealAnswer() - givenAnswer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            else if (guess == 2)
+            else if (ArithmeticTest.GetGuessCount() == 2)
             {
                 try
                 {
@@ -293,12 +280,12 @@ namespace ArithmeticTester
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(Properties.Resources.ErrorLoadingAnswersTable, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format(Properties.Resources.ErrorLoadingAnswersTable, ex.Message), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if (guess == 3)
+            else if (ArithmeticTest.GetGuessCount() == 3)
             {
-                MessageBox.Show(string.Format(Properties.Resources.IncorrectThirdGuessMessage, answer), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(string.Format(Properties.Resources.IncorrectThirdGuessMessage, ArithmeticTest.GetRealAnswer()), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 GenerateQuestion();
             }
         }
@@ -311,7 +298,7 @@ namespace ArithmeticTester
             MessageBox.Show(Properties.Resources.TestCompleteMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             ResetForm();
 
-            float score = (float)correct / (float)totguess;
+            float score = (float)ArithmeticTest.GetCorrectCount() / (float)ArithmeticTest.GetTotalGuessCount();
             if (score == 1)
             {
                 SetGradeLabel(Properties.Resources.OutstandingGrade);
