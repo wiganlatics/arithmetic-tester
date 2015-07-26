@@ -135,6 +135,9 @@
   <data name="DivisorArgumentOutOfRange" xml:space="preserve">
     <value>You can only use divisors between {0} and {1}.</value>
   </data>
+  <data name="ErrorLoadingAnswersTable" xml:space="preserve">
+    <value>Could not load answers table: {0}</value>
+  </data>
   <data name="ExcellentGrade" xml:space="preserve">
     <value>Excellent</value>
   </data>

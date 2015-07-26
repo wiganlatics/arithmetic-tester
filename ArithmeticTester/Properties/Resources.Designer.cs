@@ -115,6 +115,15 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not load answers table: {0}.
+        /// </summary>
+        internal static string ErrorLoadingAnswersTable {
+            get {
+                return ResourceManager.GetString("ErrorLoadingAnswersTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Excellent.
         /// </summary>
         internal static string ExcellentGrade {

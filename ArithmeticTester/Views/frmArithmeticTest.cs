@@ -224,7 +224,8 @@ namespace ArithmeticTester
             else
             {
                 ArithmeticTest.Factor2 = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
-                byte x = (byte)Arithmetic.Multiply(ArithmeticTest.Factor2, (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue));
+                byte x = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
+                if (ArithmeticTest.arithmeticOperator == ArithmeticOperator.Divide) x = (byte)Arithmetic.Multiply(ArithmeticTest.Factor2, x);
                 lblFactor1.Text = x.ToString();
                 lblFactor2.Text = ArithmeticTest.Factor2.ToString();
                 answer = ArithmeticTest.RealAnswer(x, ArithmeticTest.Factor2, ArithmeticTest.arithmeticOperator);
@@ -271,21 +272,28 @@ namespace ArithmeticTester
             }
             else if (guess == 2)
             {
-                frmAnswersTable AnswersTableForm = new frmAnswersTable();
-                switch (ArithmeticTest.arithmeticOperator)
+                try
                 {
-                    case ArithmeticOperator.Add:
-                        AnswersTableForm.ShowDialog();
-                        break;
-                    case ArithmeticOperator.Divide:
-                        AnswersTableForm.ShowDialog();
-                        break;
-                    case ArithmeticOperator.Multiply:
-                        AnswersTableForm.ShowDialog();
-                        break;
-                    case ArithmeticOperator.Subtract:
-                        AnswersTableForm.ShowDialog();
-                        break;
+                    frmAnswersTable AnswersTableForm = new frmAnswersTable();
+                    switch (ArithmeticTest.arithmeticOperator)
+                    {
+                        case ArithmeticOperator.Add:
+                            AnswersTableForm.ShowDialog();
+                            break;
+                        case ArithmeticOperator.Divide:
+                            AnswersTableForm.ShowDialog();
+                            break;
+                        case ArithmeticOperator.Multiply:
+                            AnswersTableForm.ShowDialog();
+                            break;
+                        case ArithmeticOperator.Subtract:
+                            AnswersTableForm.ShowDialog();
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Properties.Resources.ErrorLoadingAnswersTable, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (guess == 3)
