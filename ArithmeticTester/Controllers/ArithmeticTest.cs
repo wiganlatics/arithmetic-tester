@@ -57,6 +57,19 @@ namespace ArithmeticTester.Controllers
         public ArithmeticTest(Random rand)
         {
             this.rd = rand;
+            InitialiseCounts();
+        }
+
+        /// <summary>
+        /// Initialise the counts for the test object.
+        /// Set the counts for questions, guesses and correct answers to 0.
+        /// </summary>
+        public void InitialiseCounts()
+        {
+            correct = 0;
+            totguess = 0;
+            guess = 0;
+            qcount = 0;
         }
 
         /// <summary>
@@ -140,14 +153,6 @@ namespace ArithmeticTester.Controllers
         }
 
         /// <summary>
-        /// Reset count of correct answers back to zero.
-        /// </summary>
-        public void ResetCorrectCount()
-        {
-            correct = 0;
-        }
-
-        /// <summary>
         /// Get count of total guesses.
         /// </summary>
         /// <returns>Byte - the total number of guesses.</returns>
@@ -162,14 +167,6 @@ namespace ArithmeticTester.Controllers
         public void IncrementTotalGuessCount()
         {
             totguess++;
-        }
-
-        /// <summary>
-        /// Reset count of total guesses back to zero.
-        /// </summary>
-        public void ResetTotalGuessCount()
-        {
-            totguess = 0;
         }
 
         /// <summary>
@@ -212,14 +209,6 @@ namespace ArithmeticTester.Controllers
         public void IncrementQuestionCount()
         {
             qcount++;
-        }
-
-        /// <summary>
-        /// Reset count of number of questions asked so far back to zero.
-        /// </summary>
-        public void ResetQuestionCount()
-        {
-            qcount = 0;
         }
     }
 }

@@ -117,10 +117,7 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void Initialise()
         {
-            test.ResetCorrectCount();
-            test.ResetTotalGuessCount();
-            test.ResetGuessCount();
-            test.ResetQuestionCount();
+            test.InitialiseCounts();
             test.SetRealAnswer();
             SetQuestionNumberLabel(1);
             SetTotalGuessesLabel(test.GetTotalGuessCount());
