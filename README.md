@@ -4,7 +4,7 @@ Learning tool for basic arithmetic
 Version 1.0 Features
 ====================
 1. Choice of operators (+,-, *, /)
-2. Displays helper tables for second incorrect guesses are made
+2. Displays helper tables after second incorrect guess for a question
 3. Displays the number of questions, guesses and correct answers
 4. Displays a grade on test completion
 

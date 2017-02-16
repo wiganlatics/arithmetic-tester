@@ -40,6 +40,7 @@ namespace ArithmeticTester.Controllers
         /// The count of questions asked.
         /// </summary>
         private static byte qcount;
+        /// <summary>
         /// The number of questions to ask.
         /// </summary>
         public const byte totalQuestions = 10;

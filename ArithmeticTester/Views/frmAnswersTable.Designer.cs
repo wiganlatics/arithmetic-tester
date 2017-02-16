@@ -62,7 +62,7 @@
             this.MinimizeBox = false;
             this.Name = "frmAnswersTable";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AnswersTable";
+            this.Text = "Answers Table";
             ((System.ComponentModel.ISupportInitialize)(this.grdAnswersTable)).EndInit();
             this.ResumeLayout(false);
 
