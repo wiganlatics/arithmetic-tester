@@ -1,8 +1,7 @@
-﻿
+﻿using System;
+
 namespace ArithmeticTester.Models
 {
-    using System;
-
     /// <summary>
     /// The set of arithmetic operations that are being used.
     /// </summary>

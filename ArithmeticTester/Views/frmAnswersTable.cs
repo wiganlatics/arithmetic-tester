@@ -1,11 +1,10 @@
-﻿
+﻿using System;
+using System.Windows.Forms;
+using ArithmeticTester.Controllers;
+using ArithmeticTester.Models;
+
 namespace ArithmeticTester.Views
 {
-    using System;
-    using System.Windows.Forms;
-    using ArithmeticTester.Controllers;
-    using ArithmeticTester.Models;
-
     /// <summary>
     /// Form to display a table of answers 
     /// </summary>

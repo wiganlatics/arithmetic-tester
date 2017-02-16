@@ -1,9 +1,8 @@
-﻿
+﻿using System;
+using ArithmeticTester.Models;
+
 namespace ArithmeticTester.Controllers
 {
-    using System;
-    using ArithmeticTester.Models;
-
     /// <summary>
     /// Maintains the state of the arithmetic test.
     /// </summary>

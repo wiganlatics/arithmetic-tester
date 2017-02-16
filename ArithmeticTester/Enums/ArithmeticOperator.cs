@@ -1,5 +1,4 @@
-﻿
-namespace ArithmeticTester
+﻿namespace ArithmeticTester
 {
     /// <summary>
     /// Enumerates the available arithmetic operators.
