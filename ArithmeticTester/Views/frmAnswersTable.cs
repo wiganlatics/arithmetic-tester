@@ -14,13 +14,20 @@ namespace ArithmeticTester.Views
         /// The width of columns in the data grid.
         /// </summary>
         private const int colWidth = 30;
+        /// <summary>
+        /// The Arithmetic Test object that is in progress.
+        /// </summary>
+        private ArithmeticTest test;
 
         /// <summary>
         /// Form Constructor.
         /// </summary>
-        public frmAnswersTable()
+        /// <param name="arithmeticTest">The Arithmetic Test object in progress.</param>
+        public frmAnswersTable(ArithmeticTest arithmeticTest)
         {
             InitializeComponent();
+
+            this.test = arithmeticTest;
 
             Initialise();
         }
@@ -30,7 +37,7 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void Initialise()
         {
-            switch (ArithmeticTest.arithmeticOperator)
+            switch (test.arithmeticOperator)
             {
                 case ArithmeticOperator.Add:
                     AdditionTable();
@@ -81,7 +88,7 @@ namespace ArithmeticTester.Views
             for (byte b = Arithmetic.minFactorValue; b <= Arithmetic.maxFactorValue; b++)
             {
                 // Create columns and rows
-                byte colHeader = (byte)Arithmetic.Multiply(b, ArithmeticTest.GetFactor2());
+                byte colHeader = (byte)Arithmetic.Multiply(b, test.GetFactor2());
                 grdAnswersTable.Columns.Add(colHeader.ToString(), colHeader.ToString());
                 grdAnswersTable.Columns[b - 1].Width = colWidth;
                 grdAnswersTable.Rows.Add();
@@ -110,7 +117,7 @@ namespace ArithmeticTester.Views
                     }
                 }
 
-                grdAnswersTable[b - 1, b - 1].Value = ArithmeticTest.GetFactor2();
+                grdAnswersTable[b - 1, b - 1].Value = test.GetFactor2();
             }
         }
 

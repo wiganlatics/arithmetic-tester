@@ -11,11 +11,18 @@ namespace ArithmeticTester.Views
     public partial class frmArithmeticTest : Form
     {
         /// <summary>
+        /// The Arithmetic Test object controls state of current test.
+        /// </summary>
+        private ArithmeticTest test;
+
+        /// <summary>
         /// Form Constructor.
         /// </summary>
         public frmArithmeticTest()
         {
             InitializeComponent();
+
+            this.test = new ArithmeticTest();
 
             Initialise();
 
@@ -48,16 +55,16 @@ namespace ArithmeticTester.Views
         {
             if (e.KeyCode == Keys.Enter)
             {
-                ArithmeticTest.IncrementTotalGuessCount();
-                SetTotalGuessesLabel(ArithmeticTest.GetTotalGuessCount());
+                test.IncrementTotalGuessCount();
+                SetTotalGuessesLabel(test.GetTotalGuessCount());
                 if (FormatCheck(txtAnswer.Text))
                 {
-                    if (txtAnswer.Text == ArithmeticTest.GetRealAnswer().ToString())
+                    if (txtAnswer.Text == test.GetRealAnswer().ToString())
                     {
-                        if (ArithmeticTest.GetGuessCount() == 0)
+                        if (test.GetGuessCount() == 0)
                         {
-                            ArithmeticTest.IncrementCorrectCount();
-                            SetCorrectAnswersLabel(ArithmeticTest.GetCorrectCount());
+                            test.IncrementCorrectCount();
+                            SetCorrectAnswersLabel(test.GetCorrectCount());
                         }
                         MessageBox.Show(Properties.Resources.CorrectAnswerMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         GenerateQuestion();
@@ -88,19 +95,19 @@ namespace ArithmeticTester.Views
             {
                 case "Add":
                     lblOperator.Text = "+";
-                    ArithmeticTest.arithmeticOperator = ArithmeticOperator.Add;
+                    test.arithmeticOperator = ArithmeticOperator.Add;
                     break;
                 case "Divide":
                     lblOperator.Text = "/";
-                    ArithmeticTest.arithmeticOperator = ArithmeticOperator.Divide;
+                    test.arithmeticOperator = ArithmeticOperator.Divide;
                     break;
                 case "Multiply":
                     lblOperator.Text = "x";
-                    ArithmeticTest.arithmeticOperator = ArithmeticOperator.Multiply;
+                    test.arithmeticOperator = ArithmeticOperator.Multiply;
                     break;
                 case "Subtract":
                     lblOperator.Text = "-";
-                    ArithmeticTest.arithmeticOperator = ArithmeticOperator.Subtract;
+                    test.arithmeticOperator = ArithmeticOperator.Subtract;
                     break;
             }
         }
@@ -110,14 +117,14 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void Initialise()
         {
-            ArithmeticTest.ResetCorrectCount();
-            ArithmeticTest.ResetTotalGuessCount();
-            ArithmeticTest.ResetGuessCount();
-            ArithmeticTest.ResetQuestionCount();
-            ArithmeticTest.SetRealAnswer();
+            test.ResetCorrectCount();
+            test.ResetTotalGuessCount();
+            test.ResetGuessCount();
+            test.ResetQuestionCount();
+            test.SetRealAnswer();
             SetQuestionNumberLabel(1);
-            SetTotalGuessesLabel(ArithmeticTest.GetTotalGuessCount());
-            SetCorrectAnswersLabel(ArithmeticTest.GetCorrectCount());
+            SetTotalGuessesLabel(test.GetTotalGuessCount());
+            SetCorrectAnswersLabel(test.GetCorrectCount());
             SetGradeLabel("");
         }
 
@@ -200,20 +207,20 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void GenerateQuestion()
         {
-            ArithmeticTest.IncrementQuestionCount();
-            SetQuestionNumberLabel(ArithmeticTest.GetQuestionCount());
+            test.IncrementQuestionCount();
+            SetQuestionNumberLabel(test.GetQuestionCount());
 
-            if (ArithmeticTest.GetQuestionCount() == ArithmeticTest.totalQuestions)
+            if (test.GetQuestionCount() == test.totalQuestions)
             {
                 Finished();
             }
             else
             {
-                ArithmeticTest.SetNextFactors();
-                SetFactor1Label(ArithmeticTest.GetFactor1().ToString());
-                SetFactor2Label(ArithmeticTest.GetFactor2().ToString());
-                ArithmeticTest.SetRealAnswer();
-                ArithmeticTest.ResetGuessCount();
+                test.SetNextFactors();
+                SetFactor1Label(test.GetFactor1().ToString());
+                SetFactor2Label(test.GetFactor2().ToString());
+                test.SetRealAnswer();
+                test.ResetGuessCount();
             }
         }
 
@@ -242,24 +249,24 @@ namespace ArithmeticTester.Views
         /// <param name="givenAnswer">Integer - the answer given by user. Defaults to 0 if an integer was not provided.</param>
         private void Wrong(bool number, int givenAnswer = 0)
         {
-            ArithmeticTest.IncrementGuessCount();
-            if (ArithmeticTest.GetGuessCount() == 1 && number == true)
+            test.IncrementGuessCount();
+            if (test.GetGuessCount() == 1 && number == true)
             {
-                if (givenAnswer > ArithmeticTest.GetRealAnswer())
+                if (givenAnswer > test.GetRealAnswer())
                 {
-                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (givenAnswer - ArithmeticTest.GetRealAnswer())), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (givenAnswer - test.GetRealAnswer())), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (ArithmeticTest.GetRealAnswer() - givenAnswer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (test.GetRealAnswer() - givenAnswer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            else if (ArithmeticTest.GetGuessCount() == 2)
+            else if (test.GetGuessCount() == 2)
             {
                 try
                 {
-                    frmAnswersTable AnswersTableForm = new frmAnswersTable();
-                    switch (ArithmeticTest.arithmeticOperator)
+                    frmAnswersTable AnswersTableForm = new frmAnswersTable(test);
+                    switch (test.arithmeticOperator)
                     {
                         case ArithmeticOperator.Add:
                             AnswersTableForm.ShowDialog();
@@ -280,9 +287,9 @@ namespace ArithmeticTester.Views
                     MessageBox.Show(string.Format(Properties.Resources.ErrorLoadingAnswersTable, ex.Message), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if (ArithmeticTest.GetGuessCount() == 3)
+            else if (test.GetGuessCount() == 3)
             {
-                MessageBox.Show(string.Format(Properties.Resources.IncorrectThirdGuessMessage, ArithmeticTest.GetRealAnswer()), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(string.Format(Properties.Resources.IncorrectThirdGuessMessage, test.GetRealAnswer()), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 GenerateQuestion();
             }
         }
@@ -295,7 +302,7 @@ namespace ArithmeticTester.Views
             MessageBox.Show(Properties.Resources.TestCompleteMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             ResetForm();
 
-            float score = (float)ArithmeticTest.GetCorrectCount() / (float)ArithmeticTest.GetTotalGuessCount();
+            float score = (float)test.GetCorrectCount() / (float)test.GetTotalGuessCount();
             if (score == 1)
             {
                 SetGradeLabel(Properties.Resources.OutstandingGrade);
