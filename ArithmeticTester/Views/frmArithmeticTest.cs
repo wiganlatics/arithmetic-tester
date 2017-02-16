@@ -22,7 +22,7 @@ namespace ArithmeticTester.Views
         {
             InitializeComponent();
 
-            this.test = new ArithmeticTest();
+            this.test = new ArithmeticTest(new Random());
 
             Initialise();
 

@@ -11,7 +11,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// The random number generator.
         /// </summary>
-        private Random rd = new Random();
+        private Random rd;
         /// <summary>
         /// The first factor of question.
         /// </summary>
@@ -53,9 +53,10 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Constructor for the Arithmetic Test controller object.
         /// </summary>
-        public ArithmeticTest()
+        /// <param name="rand">The random number generator to use.</param>
+        public ArithmeticTest(Random rand)
         {
-            
+            this.rd = rand;
         }
 
         /// <summary>
