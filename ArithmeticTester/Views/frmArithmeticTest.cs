@@ -118,7 +118,6 @@ namespace ArithmeticTester.Views
         private void Initialise()
         {
             test.InitialiseCounts();
-            test.SetRealAnswer();
             SetQuestionNumberLabel(1);
             SetTotalGuessesLabel(test.GetTotalGuessCount());
             SetCorrectAnswersLabel(test.GetCorrectCount());
@@ -204,20 +203,16 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void GenerateQuestion()
         {
-            test.IncrementQuestionCount();
-            SetQuestionNumberLabel(test.GetQuestionCount());
-
             if (test.GetQuestionCount() == test.totalQuestions)
             {
                 Finished();
             }
             else
             {
-                test.SetNextFactors();
+                test.SetNextQuestion();
+                SetQuestionNumberLabel(test.GetQuestionCount());
                 SetFactor1Label(test.GetFactor1().ToString());
                 SetFactor2Label(test.GetFactor2().ToString());
-                test.SetRealAnswer();
-                test.ResetGuessCount();
             }
         }
 

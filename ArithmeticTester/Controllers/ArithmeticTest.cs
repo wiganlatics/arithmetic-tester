@@ -73,6 +73,18 @@ namespace ArithmeticTester.Controllers
         }
 
         /// <summary>
+        /// Handles setting the next question.
+        /// Moves to the next question and gets new factors.
+        /// </summary>
+        public void SetNextQuestion()
+        {
+            IncrementQuestionCount();
+            ResetGuessCount();
+            SetNextFactors();
+            SetRealAnswer();
+        }
+
+        /// <summary>
         /// Public accessor method for the first factor for the current question.
         /// </summary>
         /// <returns>Byte - the first factor.</returns>
@@ -93,7 +105,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Picks a new value for the factors for the next question.
         /// </summary>
-        public void SetNextFactors()
+        private void SetNextFactors()
         {
             factor2 = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
 
@@ -114,7 +126,7 @@ namespace ArithmeticTester.Controllers
         /// Returns the results of the arithmetic operation defined by the current factors and operator.
         /// </summary>
         /// <returns>Integer - the result of the arithmetic operation.</returns>
-        public void SetRealAnswer()
+        private void SetRealAnswer()
         {
             switch (arithmeticOperator)
             {
@@ -189,7 +201,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Reset count of guesses for current question back to zero.
         /// </summary>
-        public void ResetGuessCount()
+        private void ResetGuessCount()
         {
             guess = 0;
         }
@@ -206,7 +218,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Increment count of number of questions asked.
         /// </summary>
-        public void IncrementQuestionCount()
+        private void IncrementQuestionCount()
         {
             qcount++;
         }
