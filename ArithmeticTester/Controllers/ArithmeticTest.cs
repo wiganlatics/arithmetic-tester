@@ -103,48 +103,12 @@ namespace ArithmeticTester.Controllers
         }
 
         /// <summary>
-        /// Picks a new value for the factors for the next question.
-        /// </summary>
-        private void SetNextFactors()
-        {
-            factor2 = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
-
-            factor1 = (byte)rd.Next(Arithmetic.minFactorValue, Arithmetic.maxFactorValue);
-            if (arithmeticOperator == ArithmeticOperator.Divide) factor1 = (byte)Arithmetic.Multiply(factor2, factor1);
-        }
-
-        /// <summary>
         /// Public accessor method for the correct answer to the current question.
         /// </summary>
         /// <returns>Integer - the real answer.</returns>
         public int GetRealAnswer()
         {
             return realAnswer;
-        }
-
-        /// <summary>
-        /// Returns the results of the arithmetic operation defined by the current factors and operator.
-        /// </summary>
-        /// <returns>Integer - the result of the arithmetic operation.</returns>
-        private void SetRealAnswer()
-        {
-            switch (arithmeticOperator)
-            {
-                case ArithmeticOperator.Add:
-                    realAnswer = Arithmetic.Add(factor1, factor2);
-                    break;
-                case ArithmeticOperator.Divide:
-                    realAnswer = Arithmetic.Divide(factor1, factor2);
-                    break;
-                case ArithmeticOperator.Multiply:
-                    realAnswer = Arithmetic.Multiply(factor1, factor2);
-                    break;
-                case ArithmeticOperator.Subtract:
-                    realAnswer = Arithmetic.Subtract(factor1, factor2);
-                    break;
-                default:
-                    throw new ArithmeticException(Properties.Resources.UnknownOperatorException);
-            }
         }
 
         /// <summary>
@@ -188,6 +152,15 @@ namespace ArithmeticTester.Controllers
         public byte GetGuessCount()
         {
             return guess;
+        }
+
+        /// <summary>
+        /// Get count of number of questions asked.
+        /// </summary>
+        /// <returns>Byte - the number of questions asked.</returns>
+        public byte GetQuestionCount()
+        {
+            return qcount;
         }
 
         /// <summary>
