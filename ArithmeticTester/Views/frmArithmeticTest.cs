@@ -2,9 +2,8 @@
 using System.Windows.Forms;
 using ArithmeticTester.Controllers;
 using ArithmeticTester.Models;
-using ArithmeticTester.Views;
 
-namespace ArithmeticTester
+namespace ArithmeticTester.Views
 {
     /// <summary>
     /// Arithmetic test form.

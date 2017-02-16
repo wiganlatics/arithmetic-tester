@@ -1,4 +1,4 @@
-﻿namespace ArithmeticTester
+﻿namespace ArithmeticTester.Views
 {
     partial class frmArithmeticTest
     {
