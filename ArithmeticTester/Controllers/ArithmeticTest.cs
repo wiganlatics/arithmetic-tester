@@ -226,13 +226,13 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Increment count of total guesses.
         /// </summary>
-        /// <exception cref="System.Exception">Thrown if the type of total guesses instance variable is not a byte.</exception>
-        /// <exception cref="System.OverflowException">Thrown if incrementing total guess count would take it above max byte value.</exception>
+        /// <exception cref="System.Exception">Thrown if the type of total guesses instance variable is not a short.</exception>
+        /// <exception cref="System.OverflowException">Thrown if incrementing total guess count would take it above max short value.</exception>
         private void IncrementTotalGuessCount()
         {
-            if (totguess.GetType().Equals(typeof(byte)))
+            if (totguess.GetType().Equals(typeof(short)))
             {
-                if (totguess < byte.MaxValue)
+                if (totguess < short.MaxValue)
                 {
                     totguess++;
                 }
@@ -243,7 +243,7 @@ namespace ArithmeticTester.Controllers
             }
             else
             {
-                throw new Exception(string.Format(Properties.Resources.WrongTypeError, Properties.Resources.TotalGuessesCount, typeof(byte).Name, totguess.GetType().Name));
+                throw new Exception(string.Format(Properties.Resources.WrongTypeError, Properties.Resources.TotalGuessesCount, typeof(short).Name, totguess.GetType().Name));
             }
         }
 
@@ -282,7 +282,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Increment count of number of questions asked.
         /// </summary>
-        /// <exception cref="System.Exception">Thrown if the question count has reached maximum of questions.</exception>
+        /// <exception cref="System.Exception">Thrown if the question count has reached maximum number of questions.</exception>
         private void IncrementQuestionCount()
         {
             if (qcount <= totalQuestions)
