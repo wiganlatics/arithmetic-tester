@@ -53,7 +53,7 @@ namespace ArithmeticTester.Models
         {
             if (y >= minFactorValue && y <= maxFactorValue)
             {
-                if (x % y == 0 &&  x / y >= minFactorValue && x / y <= maxFactorValue)
+                if (x % y == 0 && x / y >= minFactorValue && x / y <= maxFactorValue)
                 {
                     return x / y;
                 }
