@@ -59,31 +59,18 @@ namespace ArithmeticTester.Views
         {
             if (e.KeyCode == Keys.Enter)
             {
-                test.IncrementTotalGuessCount();
-                SetTotalGuessesLabel(test.GetTotalGuessCount());
-                if (FormatCheck(txtAnswer.Text))
+                if (test.SubmitAnswer(txtAnswer.Text))
                 {
-                    if (txtAnswer.Text == test.GetRealAnswer().ToString())
-                    {
-                        if (test.GetGuessCount() == 0)
-                        {
-                            test.IncrementCorrectCount();
-                            SetCorrectAnswersLabel(test.GetCorrectCount());
-                        }
-                        MessageBox.Show(Properties.Resources.CorrectAnswerMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        GenerateQuestion();
-                    }
-                    else
-                    {
-                        Wrong(true, Int32.Parse(txtAnswer.Text));
-                    }
+                    SetCorrectAnswersLabel(test.GetCorrectCount());
+                    MessageBox.Show(Properties.Resources.CorrectAnswerMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    GenerateQuestion();
                 }
                 else
                 {
-                    MessageBox.Show(Properties.Resources.AnswerNotANumberMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Wrong(false);
+                    Wrong();
                 }
 
+                SetTotalGuessesLabel(test.GetTotalGuessCount());
                 ResetAnswerTextBox();
             }
         }
@@ -221,32 +208,15 @@ namespace ArithmeticTester.Views
         }
 
         /// <summary>
-        /// Checks that the given string is a a valid (positive or negative) integer.
-        /// </summary>
-        /// <param name="answer">The string to check.</param>
-        /// <returns>Boolean - true if the answer is valid.</returns>
-        private bool FormatCheck(string answer)
-        {
-            int answerNum;
-            bool validAnswer = false;
-
-            if (answer.Length > 0 && Int32.TryParse(answer, out answerNum))
-            {
-                validAnswer = true;
-            }
-
-            return validAnswer;
-        }
-
-        /// <summary>
         /// Determines the actions to take if a user makes an incorrect guess.
         /// </summary>
-        /// <param name="number">Boolean - true if the </param>
-        /// <param name="givenAnswer">Integer - the answer given by user. Defaults to 0 if an integer was not provided.</param>
-        private void Wrong(bool number, int givenAnswer = 0)
+        private void Wrong()
         {
-            test.IncrementGuessCount();
-            if (test.GetGuessCount() == 1 && number == true)
+            int givenAnswer;
+            bool isNum = Int32.TryParse(txtAnswer.Text, out givenAnswer);
+            if (!isNum) MessageBox.Show(Properties.Resources.AnswerNotANumberMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            if (test.GetGuessCount() == 1 && isNum)
             {
                 if (givenAnswer > test.GetRealAnswer())
                 {

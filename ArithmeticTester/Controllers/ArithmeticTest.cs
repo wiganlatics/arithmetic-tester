@@ -95,6 +95,38 @@ namespace ArithmeticTester.Controllers
         }
 
         /// <summary>
+        /// Converts the given answer string to a number and checks if the answer is correct.
+        /// </summary>
+        /// <param name="answer">The answer in string form.</param>
+        /// <returns>Bool - true if answer is correct, false otherwise.</returns>
+        public bool SubmitAnswer(string answer)
+        {
+            bool isCorrect = false;
+
+            IncrementTotalGuessCount();
+
+            int answerNum;
+            if (answer.Length > 0 && Int32.TryParse(answer, out answerNum))
+            {
+                if (answerNum == realAnswer)
+                {
+                    isCorrect = true;
+                    if (guess == 0) IncrementCorrectCount();
+                }
+                else
+                {
+                    IncrementGuessCount();
+                }
+            }
+            else
+            {
+                IncrementGuessCount();
+            }
+
+            return isCorrect;
+        }
+
+        /// <summary>
         /// Public accessor method for the first factor for the current question.
         /// </summary>
         /// <returns>Byte - the first factor.</returns>
