@@ -239,7 +239,6 @@ namespace ArithmeticTester.Views
                         if (test.arithmeticOperator == ArithmeticOperator.Divide)
                         {
                             AnswersTableForm = new frmAnswersTable(test.arithmeticOperator, test.GetFactor2());
-                                
                         }
                         else
                         {
