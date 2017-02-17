@@ -226,14 +226,11 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void Wrong()
         {
-            int givenAnswer;
-            bool isNum = Int32.TryParse(txtAnswer.Text, out givenAnswer);
-            if (!isNum) MessageBox.Show(Properties.Resources.AnswerNotANumberMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
             switch (test.GetGuessCount())
             {
                 case 1:
-                    if (isNum)
+                    int givenAnswer;
+                    if (Int32.TryParse(txtAnswer.Text, out givenAnswer))
                     {
                         if (givenAnswer > test.GetRealAnswer())
                         {
@@ -243,6 +240,10 @@ namespace ArithmeticTester.Views
                         {
                             MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (test.GetRealAnswer() - givenAnswer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show(Properties.Resources.AnswerNotANumberMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
 
                     break;
