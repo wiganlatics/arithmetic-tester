@@ -59,7 +59,7 @@ namespace ArithmeticTester.Controllers
         /// <exception cref="System.ArgumentException">Thrown if the number of questions is not greater than zero.</exception>
         public ArithmeticTest(Random rand, byte totalQuestions)
         {
-            if (this.totalQuestions > 0)
+            if (totalQuestions > 0)
             {
                 this.rd = rand;
                 this.totalQuestions = totalQuestions;
