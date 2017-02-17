@@ -121,7 +121,7 @@
     <value>You can only add numbers between {0} and {1}.</value>
   </data>
   <data name="AnswerNotANumberMessage" xml:space="preserve">
-    <value>That is not a number!</value>
+    <value>That is not a valid integer!</value>
   </data>
   <data name="ArgumentMustBeAboveZero" xml:space="preserve">
     <value>The total number of questions must be an integer above 0.</value>

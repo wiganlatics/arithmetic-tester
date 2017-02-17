@@ -70,7 +70,7 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to That is not a number!.
+        ///   Looks up a localized string similar to That is not a valid integer!.
         /// </summary>
         internal static string AnswerNotANumberMessage {
             get {
