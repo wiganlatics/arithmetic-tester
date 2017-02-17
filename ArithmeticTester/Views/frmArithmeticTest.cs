@@ -216,47 +216,50 @@ namespace ArithmeticTester.Views
             bool isNum = Int32.TryParse(txtAnswer.Text, out givenAnswer);
             if (!isNum) MessageBox.Show(Properties.Resources.AnswerNotANumberMessage, Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            if (test.GetGuessCount() == 1 && isNum)
+            switch (test.GetGuessCount())
             {
-                if (givenAnswer > test.GetRealAnswer())
-                {
-                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (givenAnswer - test.GetRealAnswer())), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (test.GetRealAnswer() - givenAnswer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else if (test.GetGuessCount() == 2)
-            {
-                try
-                {
-                    frmAnswersTable AnswersTableForm = new frmAnswersTable(test);
-                    switch (test.arithmeticOperator)
+                case 1:
+                    if (isNum)
                     {
-                        case ArithmeticOperator.Add:
-                            AnswersTableForm.ShowDialog();
-                            break;
-                        case ArithmeticOperator.Divide:
-                            AnswersTableForm.ShowDialog();
-                            break;
-                        case ArithmeticOperator.Multiply:
-                            AnswersTableForm.ShowDialog();
-                            break;
-                        case ArithmeticOperator.Subtract:
-                            AnswersTableForm.ShowDialog();
-                            break;
+                        if (givenAnswer > test.GetRealAnswer())
+                        {
+                            MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (givenAnswer - test.GetRealAnswer())), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show(string.Format(Properties.Resources.IncorrectGuessMessage, (test.GetRealAnswer() - givenAnswer)), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(string.Format(Properties.Resources.ErrorLoadingAnswersTable, ex.Message), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (test.GetGuessCount() == 3)
-            {
-                MessageBox.Show(string.Format(Properties.Resources.IncorrectThirdGuessMessage, test.GetRealAnswer()), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                GenerateQuestion();
+
+                    break;
+                case 2:
+                    try
+                    {
+                        frmAnswersTable AnswersTableForm;
+                        if (test.arithmeticOperator == ArithmeticOperator.Divide)
+                        {
+                            AnswersTableForm = new frmAnswersTable(test.arithmeticOperator, test.GetFactor2());
+                                
+                        }
+                        else
+                        {
+                            AnswersTableForm = new frmAnswersTable(test.arithmeticOperator);
+                        }
+
+                        AnswersTableForm.ShowDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(string.Format(Properties.Resources.ErrorLoadingAnswersTable, ex.Message), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    break;
+                case 3:
+                    MessageBox.Show(string.Format(Properties.Resources.IncorrectThirdGuessMessage, test.GetRealAnswer()), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    GenerateQuestion();
+                    break;
+                default:
+                    throw new Exception(string.Format(Properties.Resources.InvalidNumberOfGuesses, test.GetGuessCount()));
             }
         }
 

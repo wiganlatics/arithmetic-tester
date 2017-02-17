@@ -178,6 +178,15 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid number of guesses for this question: {0}..
+        /// </summary>
+        internal static string InvalidNumberOfGuesses {
+            get {
+                return ResourceManager.GetString("InvalidNumberOfGuesses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Arithmetic Tester.
         /// </summary>
         internal static string MessageBoxTitle {

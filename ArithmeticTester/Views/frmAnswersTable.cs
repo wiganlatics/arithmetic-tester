@@ -15,19 +15,25 @@ namespace ArithmeticTester.Views
         /// </summary>
         private const int colWidth = 30;
         /// <summary>
-        /// The Arithmetic Test object that is in progress.
+        /// The arithmetic operator table to display.
         /// </summary>
-        private ArithmeticTest test;
+        private ArithmeticOperator arithmeticOperator;
+        /// <summary>
+        /// The divisor - only applicable for division operator.
+        /// </summary>
+        private byte divisor;
 
         /// <summary>
         /// Form Constructor.
         /// </summary>
-        /// <param name="arithmeticTest">The Arithmetic Test object in progress.</param>
-        public frmAnswersTable(ArithmeticTest arithmeticTest)
+        /// <param name="arithmeticOperator">Display table for this arithmetic operator.</param>
+        /// <param name="arithmeticTest">Optional. Defaults to 1. The divisor to use if displaying division table.</param>
+        public frmAnswersTable(ArithmeticOperator arithmeticOperator, byte divisor = 1)
         {
             InitializeComponent();
 
-            this.test = arithmeticTest;
+            this.arithmeticOperator = arithmeticOperator;
+            this.divisor = divisor;
 
             Initialise();
         }
@@ -37,7 +43,7 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void Initialise()
         {
-            switch (test.arithmeticOperator)
+            switch (arithmeticOperator)
             {
                 case ArithmeticOperator.Add:
                     AdditionTable();
@@ -88,7 +94,7 @@ namespace ArithmeticTester.Views
             for (byte b = Arithmetic.minFactorValue; b <= Arithmetic.maxFactorValue; b++)
             {
                 // Create columns and rows
-                byte colHeader = (byte)Arithmetic.Multiply(b, test.GetFactor2());
+                byte colHeader = (byte)Arithmetic.Multiply(b, divisor);
                 grdAnswersTable.Columns.Add(colHeader.ToString(), colHeader.ToString());
                 grdAnswersTable.Columns[b - 1].Width = colWidth;
                 grdAnswersTable.Rows.Add();
@@ -117,7 +123,7 @@ namespace ArithmeticTester.Views
                     }
                 }
 
-                grdAnswersTable[b - 1, b - 1].Value = test.GetFactor2();
+                grdAnswersTable[b - 1, b - 1].Value = divisor;
             }
         }
 
