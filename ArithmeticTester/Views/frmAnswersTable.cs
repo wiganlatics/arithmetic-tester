@@ -27,7 +27,7 @@ namespace ArithmeticTester.Views
         /// Form Constructor.
         /// </summary>
         /// <param name="arithmeticOperator">Display table for this arithmetic operator.</param>
-        /// <param name="arithmeticTest">Optional. Defaults to 1. The divisor to use if displaying division table.</param>
+        /// <param name="divisor">Optional. Defaults to 1. The divisor to use if displaying division table.</param>
         public frmAnswersTable(ArithmeticOperator arithmeticOperator, byte divisor = 1)
         {
             InitializeComponent();
