@@ -88,11 +88,29 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot increment question count beyond total number of questions for test. Question count: {0}..
+        /// </summary>
+        internal static string CannotIncrementQuestionCountAboveTotal {
+            get {
+                return ResourceManager.GetString("CannotIncrementQuestionCountAboveTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Correct!.
         /// </summary>
         internal static string CorrectAnswerMessage {
             get {
                 return ResourceManager.GetString("CorrectAnswerMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to total correct answers.
+        /// </summary>
+        internal static string CorrectAnswersCount {
+            get {
+                return ResourceManager.GetString("CorrectAnswersCount", resourceCulture);
             }
         }
         
@@ -160,6 +178,15 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to guesses for question.
+        /// </summary>
+        internal static string GuessesCount {
+            get {
+                return ResourceManager.GetString("GuessesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guesses.
         /// </summary>
         internal static string GuessesLabel {
@@ -223,6 +250,15 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The {0} could not be incremented as it would cause an overflow error..
+        /// </summary>
+        internal static string OverflowError {
+            get {
+                return ResourceManager.GetString("OverflowError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Question.
         /// </summary>
         internal static string QuestionLabel {
@@ -259,6 +295,15 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to total guesses.
+        /// </summary>
+        internal static string TotalGuessesCount {
+            get {
+                return ResourceManager.GetString("TotalGuessesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown Arithmetic Operator..
         /// </summary>
         internal static string UnknownOperatorException {
@@ -273,6 +318,15 @@ namespace ArithmeticTester.Properties {
         internal static string UnsatisfactoryGrade {
             get {
                 return ResourceManager.GetString("UnsatisfactoryGrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} variable is the wrong type. Expected type: &apos;{1}.&apos; Actual type: &apos;{2}&apos;..
+        /// </summary>
+        internal static string WrongTypeError {
+            get {
+                return ResourceManager.GetString("WrongTypeError", resourceCulture);
             }
         }
     }

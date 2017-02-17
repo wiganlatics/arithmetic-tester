@@ -202,25 +202,73 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Increment count of correct answers.
         /// </summary>
+        /// <exception cref="System.Exception">Thrown if the type of correct instance variable is not a byte.</exception>
+        /// <exception cref="System.OverflowException">Thrown if incrementing correct count would take it above max byte value.</exception>
         private void IncrementCorrectCount()
         {
-            correct++;
+            if (correct.GetType().Equals(typeof(byte)))
+            {
+                if (correct < byte.MaxValue)
+                {
+                    correct++;
+                }
+                else
+                {
+                    throw new OverflowException(string.Format(Properties.Resources.OverflowError, Properties.Resources.CorrectAnswersCount));
+                }
+            }
+            else
+            {
+                throw new Exception(string.Format(Properties.Resources.WrongTypeError, Properties.Resources.CorrectAnswersCount, typeof(byte).Name, correct.GetType().Name));
+            }
         }
 
         /// <summary>
         /// Increment count of total guesses.
         /// </summary>
+        /// <exception cref="System.Exception">Thrown if the type of total guesses instance variable is not a byte.</exception>
+        /// <exception cref="System.OverflowException">Thrown if incrementing total guess count would take it above max byte value.</exception>
         private void IncrementTotalGuessCount()
         {
-            totguess++;
+            if (totguess.GetType().Equals(typeof(byte)))
+            {
+                if (totguess < byte.MaxValue)
+                {
+                    totguess++;
+                }
+                else
+                {
+                    throw new OverflowException(string.Format(Properties.Resources.OverflowError, Properties.Resources.TotalGuessesCount));
+                }
+            }
+            else
+            {
+                throw new Exception(string.Format(Properties.Resources.WrongTypeError, Properties.Resources.TotalGuessesCount, typeof(byte).Name, totguess.GetType().Name));
+            }
         }
 
         /// <summary>
         /// Increment count of guesses for current question.
         /// </summary>
+        /// <exception cref="System.Exception">Thrown if the type of guess instance variable is not a byte.</exception>
+        /// <exception cref="System.OverflowException">Thrown if incrementing guess count would take it above max byte value.</exception>
         private void IncrementGuessCount()
         {
-            guess++;
+            if (guess.GetType().Equals(typeof(byte)))
+            {
+                if (guess < byte.MaxValue)
+                {
+                    guess++;
+                }
+                else
+                {
+                    throw new OverflowException(string.Format(Properties.Resources.OverflowError, Properties.Resources.GuessesCount));
+                }
+            }
+            else
+            {
+                throw new Exception(string.Format(Properties.Resources.WrongTypeError, Properties.Resources.GuessesCount, typeof(byte).Name, guess.GetType().Name));
+            }
         }
 
         /// <summary>
@@ -234,9 +282,17 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Increment count of number of questions asked.
         /// </summary>
+        /// <exception cref="System.Exception">Thrown if the question count has reached maximum of questions.</exception>
         private void IncrementQuestionCount()
         {
-            qcount++;
+            if (qcount <= totalQuestions)
+            {
+                qcount++;
+            }
+            else
+            {
+                throw new Exception(string.Format(Properties.Resources.CannotIncrementQuestionCountAboveTotal, qcount));
+            }
         }
 
         /// <summary>
