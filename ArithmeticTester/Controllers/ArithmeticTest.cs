@@ -15,11 +15,11 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// The first factor of question.
         /// </summary>
-        private byte factor1 = Arithmetic.maxFactorValue;
+        private byte factor1;
         /// <summary>
         /// The second factor of question.
         /// </summary>
-        private byte factor2 = Arithmetic.maxFactorValue;
+        private byte factor2;
         /// <summary>
         /// The real answer for the current question.
         /// </summary>
