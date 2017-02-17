@@ -258,6 +258,15 @@ namespace ArithmeticTester.Controllers
         }
 
         /// <summary>
+        /// Get the total number of questions in a test.
+        /// </summary>
+        /// <returns>Byte - the number of questions to ask.</returns>
+        public byte GetTotalQuestionsCount()
+        {
+            return totalQuestions;
+        }
+
+        /// <summary>
         /// Increment count of number of questions asked.
         /// </summary>
         private void IncrementQuestionCount()

@@ -194,7 +194,7 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void GenerateQuestion()
         {
-            if (test.GetQuestionCount() == test.GetTotalGuessCount())
+            if (test.GetQuestionCount() == test.GetTotalQuestionsCount())
             {
                 Finished();
             }
