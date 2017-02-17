@@ -307,6 +307,10 @@ namespace ArithmeticTester.Views
             }
         }
 
+        /// <summary>
+        /// Displays a message box for the exception and disables form components since we have an invalid state.
+        /// </summary>
+        /// <param name="ex">The exception that has occurred.</param>
         private void ErrorHandler(Exception ex)
         {
             MessageBox.Show(string.Format(Properties.Resources.ErrorLoadingForm, ex.Message));
