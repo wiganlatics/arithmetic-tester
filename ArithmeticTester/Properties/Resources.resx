@@ -141,6 +141,9 @@
   <data name="ErrorLoadingAnswersTable" xml:space="preserve">
     <value>Could not load answers table: {0}</value>
   </data>
+  <data name="ErrorLoadingForm" xml:space="preserve">
+    <value>Error initialising form. Exception: {0}.</value>
+  </data>
   <data name="ExcellentGrade" xml:space="preserve">
     <value>Excellent</value>
   </data>

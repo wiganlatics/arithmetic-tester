@@ -133,6 +133,15 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error initialising form. Exception: {0}..
+        /// </summary>
+        internal static string ErrorLoadingForm {
+            get {
+                return ResourceManager.GetString("ErrorLoadingForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Excellent.
         /// </summary>
         internal static string ExcellentGrade {

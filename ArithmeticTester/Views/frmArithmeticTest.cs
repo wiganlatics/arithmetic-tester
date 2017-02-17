@@ -24,17 +24,24 @@ namespace ArithmeticTester.Views
         /// </summary>
         public frmArithmeticTest()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            this.test = new ArithmeticTest(new Random(), totalQuestions);
+                this.test = new ArithmeticTest(new Random(), totalQuestions);
 
-            Initialise();
+                Initialise();
 
-            cmbOperation.Items.Add("Add");
-            cmbOperation.Items.Add("Divide");
-            cmbOperation.Items.Add("Multiply");
-            cmbOperation.Items.Add("Subtract");
-            cmbOperation.SelectedItem = "Multiply";
+                cmbOperation.Items.Add("Add");
+                cmbOperation.Items.Add("Divide");
+                cmbOperation.Items.Add("Multiply");
+                cmbOperation.Items.Add("Subtract");
+                cmbOperation.SelectedItem = "Multiply";
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler(ex);
+            }
         }
 
         /// <summary>
@@ -200,10 +207,17 @@ namespace ArithmeticTester.Views
             }
             else
             {
-                test.SetNextQuestion();
-                SetQuestionNumberLabel(test.GetQuestionCount());
-                SetFactor1Label(test.GetFactor1().ToString());
-                SetFactor2Label(test.GetFactor2().ToString());
+                try
+                {
+                    test.SetNextQuestion();
+                    SetQuestionNumberLabel(test.GetQuestionCount());
+                    SetFactor1Label(test.GetFactor1().ToString());
+                    SetFactor2Label(test.GetFactor2().ToString());
+                }
+                catch (Exception ex)
+                {
+                    ErrorHandler(ex);
+                }
             }
         }
 
@@ -291,6 +305,14 @@ namespace ArithmeticTester.Views
             {
                 SetGradeLabel(Properties.Resources.UnsatisfactoryGrade);
             }
+        }
+
+        private void ErrorHandler(Exception ex)
+        {
+            MessageBox.Show(string.Format(Properties.Resources.ErrorLoadingForm, ex.Message));
+            btnStart.Enabled = false;
+            cmbOperation.Enabled = false;
+            txtAnswer.Enabled = false;
         }
     }
 }
