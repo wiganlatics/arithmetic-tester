@@ -14,6 +14,10 @@ namespace ArithmeticTester.Views
         /// The Arithmetic Test object controls state of current test.
         /// </summary>
         private ArithmeticTest test;
+        /// <summary>
+        /// The number of questions per test.
+        /// </summary>
+        private const byte totalQuestions = 10;
 
         /// <summary>
         /// Form Constructor.
@@ -22,7 +26,7 @@ namespace ArithmeticTester.Views
         {
             InitializeComponent();
 
-            this.test = new ArithmeticTest(new Random());
+            this.test = new ArithmeticTest(new Random(), totalQuestions);
 
             Initialise();
 
@@ -203,7 +207,7 @@ namespace ArithmeticTester.Views
         /// </summary>
         private void GenerateQuestion()
         {
-            if (test.GetQuestionCount() == test.totalQuestions)
+            if (test.GetQuestionCount() == test.GetTotalGuessCount())
             {
                 Finished();
             }

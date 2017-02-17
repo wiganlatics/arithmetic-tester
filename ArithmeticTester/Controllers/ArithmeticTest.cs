@@ -43,7 +43,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// The number of questions to ask.
         /// </summary>
-        public readonly byte totalQuestions = 10;
+        private readonly byte totalQuestions;
 
         /// <summary>
         /// The arithmetic operator to use for questions.
@@ -54,10 +54,20 @@ namespace ArithmeticTester.Controllers
         /// Constructor for the Arithmetic Test controller object.
         /// </summary>
         /// <param name="rand">The random number generator to use.</param>
-        public ArithmeticTest(Random rand)
+        /// <param name="totalQuestions">Total number of questions in a test.</param>
+        /// <exception cref="System.ArgumentException">Thrown if the number of questions is not greater than zero.</exception>
+        public ArithmeticTest(Random rand, byte totalQuestions)
         {
-            this.rd = rand;
-            InitialiseCounts();
+            if (this.totalQuestions > 0)
+            {
+                this.rd = rand;
+                this.totalQuestions = totalQuestions;
+                InitialiseCounts();
+            }
+            else
+            {
+                throw new ArgumentException(Properties.Resources.ArgumentMustBeAboveZero);
+            }
         }
 
         /// <summary>

@@ -123,6 +123,9 @@
   <data name="AnswerNotANumberMessage" xml:space="preserve">
     <value>That is not a number!</value>
   </data>
+  <data name="ArgumentMustBeAboveZero" xml:space="preserve">
+    <value>The total number of questions must be an integer above 0.</value>
+  </data>
   <data name="CorrectAnswerMessage" xml:space="preserve">
     <value>Correct!</value>
   </data>
