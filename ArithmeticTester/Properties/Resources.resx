@@ -142,7 +142,7 @@
     <value>Could not load answers table: {0}</value>
   </data>
   <data name="ErrorLoadingForm" xml:space="preserve">
-    <value>Error initialising form. Exception: {0}.</value>
+    <value>Error initialising form. Exception: {0}</value>
   </data>
   <data name="ExcellentGrade" xml:space="preserve">
     <value>Excellent</value>
@@ -157,7 +157,7 @@
     <value>Incorrect, you are {0} away!</value>
   </data>
   <data name="IncorrectThirdGuessMessage" xml:space="preserve">
-    <value>Incorrect, it was {0}</value>
+    <value>Incorrect, it was {0}.</value>
   </data>
   <data name="InvalidNumberOfGuesses" xml:space="preserve">
     <value>Invalid number of guesses for this question: {0}.</value>
@@ -181,7 +181,7 @@
     <value>You can only subtract numbers between {0} and {1}.</value>
   </data>
   <data name="TestCompleteMessage" xml:space="preserve">
-    <value>You have completed the test</value>
+    <value>You have completed the test.</value>
   </data>
   <data name="UnknownOperatorException" xml:space="preserve">
     <value>Unknown Arithmetic Operator.</value>

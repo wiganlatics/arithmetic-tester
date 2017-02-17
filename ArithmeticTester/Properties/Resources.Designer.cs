@@ -133,7 +133,7 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error initialising form. Exception: {0}..
+        ///   Looks up a localized string similar to Error initialising form. Exception: {0}.
         /// </summary>
         internal static string ErrorLoadingForm {
             get {
@@ -178,7 +178,7 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incorrect, it was {0}.
+        ///   Looks up a localized string similar to Incorrect, it was {0}..
         /// </summary>
         internal static string IncorrectThirdGuessMessage {
             get {
@@ -250,7 +250,7 @@ namespace ArithmeticTester.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have completed the test.
+        ///   Looks up a localized string similar to You have completed the test..
         /// </summary>
         internal static string TestCompleteMessage {
             get {
