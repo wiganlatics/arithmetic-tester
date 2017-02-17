@@ -164,14 +164,6 @@ namespace ArithmeticTester.Controllers
         }
 
         /// <summary>
-        /// Increment count of correct answers.
-        /// </summary>
-        private void IncrementCorrectCount()
-        {
-            correct++;
-        }
-
-        /// <summary>
         /// Get count of total guesses.
         /// </summary>
         /// <returns>Short - the total number of guesses.</returns>
@@ -181,28 +173,12 @@ namespace ArithmeticTester.Controllers
         }
 
         /// <summary>
-        /// Increment count of total guesses.
-        /// </summary>
-        private void IncrementTotalGuessCount()
-        {
-            totguess++;
-        }
-
-        /// <summary>
         /// Get count of guesses for current question.
         /// </summary>
         /// <returns>Byte - the number of correct answers.</returns>
         public byte GetGuessCount()
         {
             return guess;
-        }
-
-        /// <summary>
-        /// Increment count of guesses for current question.
-        /// </summary>
-        private void IncrementGuessCount()
-        {
-            guess++;
         }
 
         /// <summary>
@@ -221,6 +197,30 @@ namespace ArithmeticTester.Controllers
         public byte GetTotalQuestionsCount()
         {
             return totalQuestions;
+        }
+
+        /// <summary>
+        /// Increment count of correct answers.
+        /// </summary>
+        private void IncrementCorrectCount()
+        {
+            correct++;
+        }
+
+        /// <summary>
+        /// Increment count of total guesses.
+        /// </summary>
+        private void IncrementTotalGuessCount()
+        {
+            totguess++;
+        }
+
+        /// <summary>
+        /// Increment count of guesses for current question.
+        /// </summary>
+        private void IncrementGuessCount()
+        {
+            guess++;
         }
 
         /// <summary>
