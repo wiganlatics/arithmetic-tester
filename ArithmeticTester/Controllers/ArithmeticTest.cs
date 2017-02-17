@@ -166,7 +166,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Increment count of correct answers.
         /// </summary>
-        public void IncrementCorrectCount()
+        private void IncrementCorrectCount()
         {
             correct++;
         }
@@ -183,7 +183,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Increment count of total guesses.
         /// </summary>
-        public void IncrementTotalGuessCount()
+        private void IncrementTotalGuessCount()
         {
             totguess++;
         }
@@ -200,7 +200,7 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Increment count of guesses for current question.
         /// </summary>
-        public void IncrementGuessCount()
+        private void IncrementGuessCount()
         {
             guess++;
         }
