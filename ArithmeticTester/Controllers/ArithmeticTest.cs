@@ -206,14 +206,6 @@ namespace ArithmeticTester.Controllers
         }
 
         /// <summary>
-        /// Reset count of guesses for current question back to zero.
-        /// </summary>
-        private void ResetGuessCount()
-        {
-            guess = 0;
-        }
-
-        /// <summary>
         /// Get count of number of questions asked.
         /// </summary>
         /// <returns>Byte - the number of questions asked.</returns>
@@ -229,6 +221,14 @@ namespace ArithmeticTester.Controllers
         public byte GetTotalQuestionsCount()
         {
             return totalQuestions;
+        }
+
+        /// <summary>
+        /// Reset count of guesses for current question back to zero.
+        /// </summary>
+        private void ResetGuessCount()
+        {
+            guess = 0;
         }
 
         /// <summary>
