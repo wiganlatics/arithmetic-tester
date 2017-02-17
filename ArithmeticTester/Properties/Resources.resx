@@ -126,8 +126,14 @@
   <data name="ArgumentMustBeAboveZero" xml:space="preserve">
     <value>The total number of questions must be an integer above 0.</value>
   </data>
+  <data name="CannotIncrementQuestionCountAboveTotal" xml:space="preserve">
+    <value>Cannot increment question count beyond total number of questions for test. Question count: {0}.</value>
+  </data>
   <data name="CorrectAnswerMessage" xml:space="preserve">
     <value>Correct!</value>
+  </data>
+  <data name="CorrectAnswersCount" xml:space="preserve">
+    <value>total correct answers</value>
   </data>
   <data name="CorrectLabel" xml:space="preserve">
     <value>Correct</value>
@@ -150,6 +156,9 @@
   <data name="GoodGrade" xml:space="preserve">
     <value>Good</value>
   </data>
+  <data name="GuessesCount" xml:space="preserve">
+    <value>guesses for question</value>
+  </data>
   <data name="GuessesLabel" xml:space="preserve">
     <value>Guesses</value>
   </data>
@@ -171,6 +180,9 @@
   <data name="OutstandingGrade" xml:space="preserve">
     <value>Outstanding</value>
   </data>
+  <data name="OverflowError" xml:space="preserve">
+    <value>The {0} could not be incremented as it would cause an overflow error.</value>
+  </data>
   <data name="QuestionLabel" xml:space="preserve">
     <value>Question</value>
   </data>
@@ -183,10 +195,16 @@
   <data name="TestCompleteMessage" xml:space="preserve">
     <value>You have completed the test.</value>
   </data>
+  <data name="TotalGuessesCount" xml:space="preserve">
+    <value>total guesses</value>
+  </data>
   <data name="UnknownOperatorException" xml:space="preserve">
     <value>Unknown Arithmetic Operator.</value>
   </data>
   <data name="UnsatisfactoryGrade" xml:space="preserve">
     <value>Please see your teacher</value>
+  </data>
+  <data name="WrongTypeError" xml:space="preserve">
+    <value>The {0} variable is the wrong type. Expected type: '{1}.' Actual type: '{2}'.</value>
   </data>
 </root>
