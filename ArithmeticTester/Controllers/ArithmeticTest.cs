@@ -29,9 +29,10 @@ namespace ArithmeticTester.Controllers
         /// </summary>
         private byte correct;
         /// <summary>
-        /// The count of total number of guesses.
+        /// The count of total number of guesses. Is a short integer since there may be multiple guesses per question.
+        /// i.e. guesses (byte) * qcount (byte) may be larger than max byte value.
         /// </summary>
-        private byte totguess;
+        private short totguess;
         /// <summary>
         /// The count of guesses for current question.
         /// </summary>
@@ -209,8 +210,8 @@ namespace ArithmeticTester.Controllers
         /// <summary>
         /// Get count of total guesses.
         /// </summary>
-        /// <returns>Byte - the total number of guesses.</returns>
-        public byte GetTotalGuessCount()
+        /// <returns>Short - the total number of guesses.</returns>
+        public short GetTotalGuessCount()
         {
             return totguess;
         }

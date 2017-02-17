@@ -144,7 +144,7 @@ namespace ArithmeticTester.Views
         /// Updates the total guesses label.
         /// </summary>
         /// <param name="totalGuesses">The number of total guesses.</param>
-        private void SetTotalGuessesLabel(byte totalGuesses)
+        private void SetTotalGuessesLabel(short totalGuesses)
         {
             lblGuesses.Text = string.Format("{0}: {1}", Properties.Resources.GuessesLabel, totalGuesses);
         }
