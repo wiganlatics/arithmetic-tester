@@ -253,6 +253,7 @@ namespace ArithmeticTester.Controllers
         /// Returns the results of the arithmetic operation defined by the current factors and operator.
         /// </summary>
         /// <returns>Integer - the result of the arithmetic operation.</returns>
+        /// <exception cref="System.ArithmeticException">Throws an exception if an unknown operator is specified.</exception>
         private void SetRealAnswer()
         {
             switch (arithmeticOperator)
