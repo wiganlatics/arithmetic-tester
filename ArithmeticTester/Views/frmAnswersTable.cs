@@ -58,9 +58,6 @@ namespace ArithmeticTester.Views
                     SubtractionTable();
                     break;
             }
-
-            // Don't want any cells highlighted
-            grdAnswersTable.ClearSelection();
         }
 
         /// <summary>
@@ -171,6 +168,17 @@ namespace ArithmeticTester.Views
                 }
                 grdAnswersTable[b - 1, b - 1].Value = 0;
             }
+        }
+
+        /// <summary>
+        /// Eventhandler for the form load event.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The parameters.</param>
+        private void frmAnswersTable_Load(object sender, EventArgs e)
+        {
+            // Don't want any cells highlighted
+            grdAnswersTable.ClearSelection();
         }
     }
 }
