@@ -11,6 +11,7 @@ Version 1.0 Features
 Version 1.1 Features
 ====================
 1. Better error handling
+2. Fix bug where completion message is displayed when user reaches tenth question rather than after they've answered it.
 
 Future Releases
 ===============
