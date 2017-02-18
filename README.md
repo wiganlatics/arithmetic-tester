@@ -11,7 +11,8 @@ Version 1.0 Features
 Version 1.1 Features
 ====================
 1. Better error handling
-2. Fix bug where completion message is displayed when user reaches tenth question rather than after they've answered it.
+2. Fix bug where completion message is displayed when user reaches tenth question rather than after they've answered it
+3. Fix bug #11 where the gridview.ClearSelection() was not working because it was called too early
 
 Future Releases
 ===============
