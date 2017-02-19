@@ -314,7 +314,7 @@ namespace ArithmeticTester.Views
         /// <param name="ex">The exception that has occurred.</param>
         private void ErrorHandler(Exception ex)
         {
-            MessageBox.Show(string.Format(Properties.Resources.ErrorLoadingForm, ex.Message));
+            MessageBox.Show(string.Format(Properties.Resources.ErrorLoadingForm, ex.Message), Properties.Resources.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             btnStart.Enabled = false;
             cmbOperation.Enabled = false;
             txtAnswer.Enabled = false;

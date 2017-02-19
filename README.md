@@ -14,6 +14,10 @@ Version 1.1 Features
 2. Fix bug where completion message is displayed when user reaches tenth question rather than after they've answered it
 3. Fix bug #11 where the gridview.ClearSelection() was not working because it was called too early
 
+Version 1.2 Features
+====================
+1. Add title and exclamation icon to error handling message box.
+
 Future Releases
 ===============
 1. Add unit tests
