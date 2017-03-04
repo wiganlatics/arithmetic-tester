@@ -18,9 +18,18 @@ Version 1.2 Features
 ====================
 1. Add title and exclamation icon to error handling message box.
 
+Version 1.2.1 Features
+======================
+1. Add document to explain grading system. See '.\Design Docs\Grading System.xlsx' for further details.
+2. Add MIT License.
+
 Future Releases
 ===============
 1. Add unit tests
 2. Use a configurable range of factors (beyond 1 to 12) - take data types (byte,int) into account
 3. Have a configurable number of questions
 4. Have a random operator to test multiple operators in same test
+
+License
+=======
+Licensed under MIT License. Copyright (c) 2017 Matthew Wright. See LICENSE.txt for further details.
