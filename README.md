@@ -19,6 +19,9 @@ Learning tool for basic arithmetic
 1. Add document to explain grading system. See '.\Design Docs\Grading System.xlsx' for further details.
 2. Add MIT License.
 
+### Version 1.2.2 Features
+1. Add License summary to source code files.
+
 # Future Releases
 1. Add unit tests
 2. Use a configurable range of factors (beyond 1 to 12) - take data types (byte,int) into account
@@ -26,4 +29,10 @@ Learning tool for basic arithmetic
 4. Have a random operator to test multiple operators in same test
 
 # License
-Licensed under MIT License. Copyright (c) 2017 Matthew Wright. See LICENSE.txt for further details.
+Copyright (c) 2017 Matthew Wright.
+Licensed under MIT License. See LICENSE.txt for further details.
+
+This software should be distributed with a LICENSE.TXT file in the solution root.
+Alternatively  you can find a copy of the license in the github repository:
+https://github.com/wiganlatics/temperature-converter.
+The MIT License text is also available at: https://choosealicense.com/licenses/mit/.
